@@ -234,4 +234,18 @@ Nguồn tham chiếu: 05_tables_hyperlinks.md phần Table — Bảng dữ liệ
 
 Tuy nhiên, tôi đồng ý rằng không cần cực đoan. `<div>` vẫn cực kỳ phù hợp trong trường hợp bạn cần một thẻ bọc (wrapper) chỉ để phục vụ mục đích Layout hoặc Styling (như tạo một container để căn giữa bằng Flexbox) mà không mang ý nghĩa nội dung.
 
-Tóm lại, Semantic HTML không phải là "học thêm thẻ mới", mà là học cách viết code có tư duy và bền vững. Đừng để trang web của mình trở thành một "nồi lẩu div" vô hồn.
+## PHẦN B
+
+# Bài B3
+
+Lỗi 1: Dòng 1 - Thiếu loại tài liệu - `<!DOCTYPE html>`
+Lỗi 2: Dòng 2 - Thiếu ngôn ngữ - `<html lang="vi">`
+Lỗi 3: Dòng 4 - Thiếu thẻ đóng - `<title>Trang web</title>`
+Lỗi 4: Dòng 5 - Sai giá trị của thuộc tính charset - `<meta charset="utf-8">`
+Lỗi 5: Dòng 8 - Sai thẻ đóng - `<h1>Welcome to ShopTLU</h1>`
+Lỗi 6: Dòng 12 - Sai thẻ đóng - `<a href="home">Trang chủ</a>`
+Lỗi 7: Dòng 22 - Sai vị trí thẻ `<b>` và `<p>` - <p>Giá: <b>25.990.000đ</b></p>
+Lỗi 8: Dòng 28 - Phải dùng `<thead></thead>` cho tiêu đề bảng - `<thead></thead>`
+Lỗi 9: Dòng 29 và 30 - Dùng `<th></th>` cho tiêu đề - `<th></th>`
+Lỗi 10: Dòng 44 - 1 trang web chỉ dùng 1 thẻ `<main>` - `<aside></aside>`
+Lỗi 11: Dòng 49 - Thiếu thẻ đóng - `<p>Copyright 2026</p>`
