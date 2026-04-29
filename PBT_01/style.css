@@ -1,0 +1,8 @@
+th,td {
+    border: 1px solid;
+}
+.main-nav li{
+    list-style-type: none;
+    display: inline;
+    margin: 10px;
+}
