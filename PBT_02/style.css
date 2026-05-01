@@ -1,0 +1,13 @@
+th, td{
+    border: 1px solid;
+    padding: 5px;
+    text-align: center;
+}
+
+.d-block{
+    display: block;
+}
+
+.p-10{
+    padding: 10px;
+}
