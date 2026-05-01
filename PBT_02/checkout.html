@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Đặt hàng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Giỏ hàng</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Bút bi</td>
+                <td>5k</td>
+                <td>10</td>
+                <td>50k</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Bút chì</td>
+                <td>3k</td>
+                <td>10</td>
+                <td>30k</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Tẩy</td>
+                <td>5k</td>
+                <td>10</td>
+                <td>50k</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5">Tổng cộng: 130k</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h2>Thanh toán</h2>
+    <form action="#" method="post">
+        <div>
+            <label for="pttt">Phương thức thanh toán:</label>
+            <input type="radio" name="pttt" id="cod" value="cod">
+            <label for="cod">COD</label>
+            <input type="radio" name="pttt" id="ck" value="ck">
+            <label for="ck">Chuyển khoản</label>
+            <input type="radio" name="pttt" id="vi-dien-tu" value="vi-dien-tu">
+            <label for="vi-dien-tu">Ví điện tử</label>
+        </div>
+        <div class="p-10">
+            <label for="discount">Mã giảm giá</label>
+            <input type="text" id="discount" name="discount" pattern="^SALE\d{4}$" placeholder="SALE2026">
+        </div>
+        <label class="p-10" for="note">Ghi chú</label>
+        <textarea name="note" id="note"></textarea>
+
+        <fieldset>
+            <legend>Thông tin giao hàng</legend>
+            <div class="p-10">
+                <label for="city">Tỉnh/Thành phố:</label>
+                <select id="city" name="city" required>
+                    <option value="">-- Chọn tỉnh/thành phố --</option>
+                    <option value="hanoi">Hà Nội</option>
+                    <option value="hcm">TP. Hồ Chí Minh</option>
+                    <option value="danang">Đà Nẵng</option>
+                    <option value="hue">Huế</option>
+                    <option value="thanhhoa">Thanh Hóa</option>
+                </select>
+            </div>
+            <div class="p-10">
+                <label for="district">Quận/Huyện:</label>
+                <select id="district" name="district" required>
+                    <option value="">-- Chọn quận/huyện --</option>
+                </select>
+            </div>
+            <label for="address">Địa chỉ chi tiết:</label>
+            <textarea name="address" id="address" rows="3"
+                placeholder="Nhập số nhà, tên đường, phường/xã..."></textarea>
+            <div class="p-10">
+                <label for="gender">Giới tính:</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Nam</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Nữ</label>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Khác</label>
+            </div>
+            <div>
+                <label for="ngay-giao">Ngày giao hàng mong muốn:</label>
+                <input type="date" min="2026-05-02">
+            </div>
+            <div class="p-10">
+                <label for="time">Khung giờ:</label>
+                <select id="time" name="time" required>
+                    <option value="">-- Chọn khung giờ --</option>
+                    <option value="morning">Sáng (8h - 12h)</option>
+                    <option value="afternoon">Chiều (14h - 18h)</option>
+                    <option value="evening">Tối (18h - 21h)</option>
+                </select>
+            </div>
+            <div class="p-10">
+                <label for="ngay-giao">Thời gian giao hàng:(Từ 1-7 ngày)</label>
+                <input type="range" id="ngay-giao" name="ngay-giao" min="1" max="7" step="1">
+            </div>
+        </fieldset>
+        <button type="submit" aria-label="Xác nhận đặt hàng">Đặt hàng</button>
+    </form>
+</body>
+
+</html>
