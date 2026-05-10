@@ -86,3 +86,45 @@ Tài liệu tham chiếu: tuan_2_css_core/08_introduction_css.md
 6. article > p → Chọn: tất cả thẻ p là con trực tiếp của thẻ article
 7. a[href="/"] → Chọn: thẻ a có href="/" (Home)
 8. .top-bar.dark h1 → Chọn: thẻ h1 có class là top-bar và dark
+
+## Câu A3
+
+```css
+/* Trường hợp 1: content-box (mặc định) */
+.box-1 {
+  width: 400px;
+  padding: 20px;
+  border: 5px solid black;
+  margin: 10px;
+}
+→ Chiều rộng hiển thị = 450px
+→ Không gian chiếm trên trang = 470px
+
+/* Trường hợp 2: border-box */
+.box-2 {
+  box-sizing: border-box;
+  width: 400px;
+  padding: 20px;
+  border: 5px solid black;
+  margin: 10px;
+}
+→ Chiều rộng hiển thị = 400px
+→ Kích thước content thực tế = 350px
+→ Không gian chiếm trên trang = 420px
+
+/* Trường hợp 3: Margin collapse */
+.box-a {
+  margin-bottom: 25px;
+}
+.box-b {
+  margin-top: 40px;
+}
+```
+
+→ Khoảng cách giữa box-a và box-b = 40px
+→ Giải thích tại sao KHÔNG PHẢI 65px
+Trong CSS, khi các lề dọc (margins) gặp nhau, chúng không cộng dồn lại mà bị "gộp" (collapse).
+
+Quy tắc là: Giá trị lề lớn hơn sẽ được giữ lại, và giá trị nhỏ hơn sẽ bị triệt tiêu bên trong lề lớn đó.
+
+Ở đây, 40px (margin-top của box-b) lớn hơn 25px (margin-bottom của box-a), vì vậy trình duyệt chọn 40px làm khoảng cách thực tế.
