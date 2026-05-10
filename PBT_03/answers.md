@@ -128,3 +128,18 @@ Trong CSS, khi các lề dọc (margins) gặp nhau, chúng không cộng dồn 
 Quy tắc là: Giá trị lề lớn hơn sẽ được giữ lại, và giá trị nhỏ hơn sẽ bị triệt tiêu bên trong lề lớn đó.
 
 Ở đây, 40px (margin-top của box-b) lớn hơn 25px (margin-bottom của box-a), vì vậy trình duyệt chọn 40px làm khoảng cách thực tế.
+
+## Câu A4
+
+1. Tính Specificity Score (a, b, c)
+
+- Rude A: p -> Score: (0, 0, 1) -> Giải thích: 1 Element
+- Rude B: .price -> Score: (0, 1, 0) -> Giải thích: 1 Class
+- Rude C: #main-price -> Score: (1, 0, 0) -> Giải thích: 1 Id
+- Rude D: p.price -> Score: (0, 1, 1) -> Giải thích: 1 Class + 1 Element
+
+2. Element sẽ có màu đỏ vì: Trình duyệt sẽ so sánh điểm số từ trái sang phải. Rule C (#main-price) có điểm ở cột a (ID) là 1, cao nhất trong tất cả các rule. Dù Rule D có cả class và element nhưng vẫn không thể vượt qua sức mạnh của một ID selector.
+
+3. Nếu thêm Inline Style (màu orange) thì Element sẽ có màu cam vì: Inline style có độ ưu tiên cao hơn tất cả các selector trong file CSS bên ngoài (điểm số của nó có thể coi là 1, 0, 0, 0 nếu tính cả cột thứ 4).
+
+4. Nếu Rule A thêm !important thì Element sẽ có màu đen vì: Khi một thuộc tính được đánh dấu !important, nó sẽ phá vỡ mọi quy tắc về Specificity thông thường và giành quyền ưu tiên cao nhất (cao hơn cả ID và Inline style). Vì vậy, màu đen của Rule A sẽ được hiển thị.
