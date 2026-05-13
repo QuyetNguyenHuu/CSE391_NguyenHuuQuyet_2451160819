@@ -166,3 +166,56 @@ Quy tắc là: Giá trị lề lớn hơn sẽ được giữ lại, và giá tr
   Phải tính toán chiều rộng của content sao cho khi cộng thêm padding và border thì bằng với chiều rộng mong muốn
   - Sidebar = 300 - 20*2 - 1*2 = 258 px
   - Content = 660 - 30*2 + 1*2 = 598 px
+
+## Câu C2
+
+1. "Sản phẩm A" (h2)
+   font-size = 20px
+
+Giải thích: Có hai selector nhắm vào phần tử này là .card .title (0, 2, 0) và .container (0, 1, 0 - thông qua kế thừa). Tuy nhiên, .card .title nhắm trực tiếp vào class của h2 nên nó thắng các giá trị kế thừa từ cha.
+
+color = green
+
+Giải thích: Có 3 selector tranh chấp màu sắc: .card .title (0, 2, 0), #featured .title (1, 1, 0), và .highlight. Mặc dù #featured .title có điểm ID rất cao, nhưng .highlight sử dụng từ khóa !important, nó ghi đè tất cả các quy tắc về độ cụ thể (specificity) để áp dụng màu xanh lá.
+
+Dưới đây là phân tích chi tiết về kết quả hiển thị của các phần tử dựa trên quy tắc Cascade (Thứ tự ưu tiên) và Inheritance (Kế thừa) trong CSS.
+
+1. "Sản phẩm A" (h2)
+   font-size = 20px
+
+Giải thích: Có hai selector nhắm vào phần tử này là .card .title (0, 2, 0) và .container (0, 1, 0 - thông qua kế thừa). Tuy nhiên, .card .title nhắm trực tiếp vào class của h2 nên nó thắng các giá trị kế thừa từ cha.
+
+color = green
+
+Giải thích: Có 3 selector tranh chấp màu sắc: .card .title (0, 2, 0), #featured .title (1, 1, 0), và .highlight. Mặc dù #featured .title có điểm ID rất cao, nhưng .highlight sử dụng từ khóa !important, nó ghi đè tất cả các quy tắc về độ cụ thể (specificity) để áp dụng màu xanh lá.
+
+2. "Mô tả sản phẩm" (p trong card featured)
+   color = blue
+
+Giải thích:
+
+Selector .card p (0, 1, 1) có thuộc tính color: inherit.
+
+Từ khóa inherit buộc phần tử <p> phải lấy màu từ phần tử cha trực tiếp của nó là .card.
+
+Phần tử .card có selector .card { color: blue; } (0, 1, 0) quy định màu xanh dương. Vì vậy, thẻ <p> này hiển thị màu xanh dương.
+
+3. "Sản phẩm B" (h2)
+   font-size = 20px
+
+Giải thích: Tương tự Sản phẩm A, selector .card .title (0, 2, 0) nhắm trực tiếp vào phần tử này và có độ cụ thể cao hơn các giá trị font-size mặc định hoặc kế thừa từ .container.
+
+color = blue
+
+Giải thích: Thẻ h2 này không có id featured và không có class highlight. Do đó, selector #featured .title và .highlight không áp dụng. Selector duy nhất khớp là .card .title, nhưng selector này không định nghĩa màu sắc. Vì vậy, h2 kế thừa màu sắc từ cha của nó là .card (đang có màu xanh dương).
+
+4. "Mô tả sản phẩm B" (p.highlight)
+   color = green
+
+Giải thích:
+
+Mặc dù thẻ <p> nằm trong .card có quy tắc color: inherit (đang cố gắng lấy màu xanh từ .card).
+
+Tuy nhiên, class .highlight trên chính nó có thuộc tính color: green !important;.
+
+Trong CSS Cascade, một thuộc tính được khai báo trực tiếp trên phần tử với !important sẽ luôn chiến thắng các thuộc tính được kế thừa hoặc các selector thông thường khác.
