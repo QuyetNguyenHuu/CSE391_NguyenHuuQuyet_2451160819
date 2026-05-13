@@ -143,3 +143,26 @@ Quy tắc là: Giá trị lề lớn hơn sẽ được giữ lại, và giá tr
 3. Nếu thêm Inline Style (màu orange) thì Element sẽ có màu cam vì: Inline style có độ ưu tiên cao hơn tất cả các selector trong file CSS bên ngoài (điểm số của nó có thể coi là 1, 0, 0, 0 nếu tính cả cột thứ 4).
 
 4. Nếu Rule A thêm !important thì Element sẽ có màu đen vì: Khi một thuộc tính được đánh dấu !important, nó sẽ phá vỡ mọi quy tắc về Specificity thông thường và giành quyền ưu tiên cao nhất (cao hơn cả ID và Inline style). Vì vậy, màu đen của Rule A sẽ được hiển thị.
+
+# PHẦN C — DEBUG & SUY LUẬN
+
+## Câu C1
+
+1. Tính chiều rộng thực tế của sidebar và content (content-box!)
+
+- Sidebar: 300 + 20*2 + 1*2 = 342 px
+- Content: 660 + 30*2 + 1*2 = 722 px
+
+2. Layout bị vỡ vì:
+
+- Tổng Chiều rộng thực tế của sidebar và content lớn hơn chiều rộng của container chứa nó nên theo cơ chế của float content sẽ bị đẩy xuống dưới
+
+3. Đưa ra 2 cách sửa:
+
+- Cách 1: Dùng border-box
+  Thêm box-sizing = border-box cho cả 2 khi đó chiều rộng của 2 phần tử sẽ là chiều rộng của border, content bị thu nhỏ cho vừa với border
+
+- Cách 2: Không dùng border-box
+  Phải tính toán chiều rộng của content sao cho khi cộng thêm padding và border thì bằng với chiều rộng mong muốn
+  - Sidebar = 300 - 20*2 - 1*2 = 258 px
+  - Content = 660 - 30*2 + 1*2 = 598 px
