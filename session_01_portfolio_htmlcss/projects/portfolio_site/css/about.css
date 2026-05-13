@@ -1,0 +1,35 @@
+.container{
+    max-width: 1100px;
+    margin: auto;
+    padding: 5rem 2rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+}
+
+.about-image img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 3px solid var(--color-primary);
+}
+
+.about-content h2{
+    font-size: 2.5rem;
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+.about-content .lead{
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}

@@ -1,0 +1,33 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+}
+
+.hero h1{
+  font-size: 3.5rem;
+}
+
+.hero h1 span{
+  color: rgb(251, 214, 4);
+}
+
+.cta-button{
+  border: 1px solid;
+  background-color: white;
+  color: var(--color-primary);
+  font-weight: 600;
+  border-radius: 2.5rem;
+ padding: 1rem 2.5rem;
+  margin-top: 2rem;
+}
+
+.cta-button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
