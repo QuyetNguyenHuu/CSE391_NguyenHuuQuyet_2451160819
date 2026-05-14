@@ -219,3 +219,9 @@ Mặc dù thẻ <p> nằm trong .card có quy tắc color: inherit (đang cố g
 Tuy nhiên, class .highlight trên chính nó có thuộc tính color: green !important;.
 
 Trong CSS Cascade, một thuộc tính được khai báo trực tiếp trên phần tử với !important sẽ luôn chiến thắng các thuộc tính được kế thừa hoặc các selector thông thường khác.
+
+# Phần B
+
+# Bài B2
+
+**Phần 1**
