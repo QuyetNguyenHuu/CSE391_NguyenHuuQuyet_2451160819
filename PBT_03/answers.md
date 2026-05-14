@@ -23,7 +23,7 @@ Tài liệu tham chiếu: tuan_2_css_core/08_introduction_css.md
   - Cần thay đổi kiểu dáng nhanh chóng cho một phần tử duy nhất
   - Trong các email HTML (nơi các file CSS bên ngoài thường không được hỗ trợ tốt).
 
-2. Internal CSS (trong <style>)
+2. Internal CSS trong <style>
 
 ```html
 <head>
@@ -222,6 +222,39 @@ Trong CSS Cascade, một thuộc tính được khai báo trực tiếp trên ph
 
 # Phần B
 
-# Bài B2
+## Bài B2
 
 **Phần 1**
+
+- Hộp 1 (content-box): chiều rộng thực tế = 350 px (đo từ DevTools)
+- Hộp 2 (border-box): chiều rộng thực tế = 300 px (đo từ DevTools)
+- Giải thích sự khác biệt:
+  - content-box: Trình duyệt hiểu width chỉ là kích thước của phần nội dung (content). Nếu thêm padding hay border, hộp sẽ bị phình to ra thêm.
+  - border-box: Trình duyệt hiểu width là kích thước tổng cuối cùng của hộp. Padding và border sẽ được lấn vào bên trong, giúp kích thước hộp luôn cố định đúng width đã đặt.
+
+## Bài B3
+
+| STT | CSS Rule Selector       | Specificity Score | Màu sắc |
+| :-- | :---------------------- | :---------------- | :------ |
+| 1   | p                       | 0, 0, 1           | Gray    |
+| 2   | p:first-line            | 0, 0, 2           | Silver  |
+| 3   | .text                   | 0, 0, 2           | Blue    |
+| 4   | .text                   | 0, 2, 0           | Green   |
+| 5   | .text:not(:hover)       | 0, 2, 0           | Purple  |
+| 6   | .text[class*=""light""] | 0, 2, 0           | Orange  |
+| 7   | #demo                   | 1,0,0             | Brown   |
+| 8   | p#demo                  | 1, 0, 1           | Cyan    |
+| 9   | #demo.text              | 1, 1, 0           | Magenta |
+| 10  | #demo.text.highlight    | 1, 2, 0           | Red     |
+
+2. Element cuối cùng hiển thị màu gì? Tại sao?
+
+- Trả lời: Hiển thị màu Đỏ (Red).
+
+- Giải thích: Vì Rule số 10 (#demo.text.highlight) có điểm Specificity cao nhất (1,1,1). Trong CSS, trình duyệt sẽ ưu tiên Rule nào có điểm số từ trái sang phải cao nhất (ưu tiên ID nhất, rồi đến Class, cuối cùng mới là Element).
+
+3. Thay đổi thứ tự rules trong CSS file. Kết quả có đổi không? Giải thích.
+
+- Trường hợp 1 (Khác điểm): Nếu đảo Rule 1 xuống dưới cùng, kết quả KHÔNG ĐỔI. Thẻ <p> vẫn màu đỏ vì Rule 10 có điểm ưu tiên cao hơn hẳn Rule 1.
+
+- Trường hợp 2 (Cùng điểm): Nếu đảo thứ tự giữa Rule 4, 5 và 6 (đều là 0,2,0), kết quả CÓ ĐỔI. Khi các Rule có độ ưu tiên bằng nhau, trình duyệt sẽ áp dụng quy tắc "The Last Rule Wins" (Rule nào viết sau sẽ đè lên Rule trước).

@@ -1,0 +1,29 @@
+/* 1. Element Selector (0,0,1) */
+p { color: gray; }
+
+/* 2. Pseudo-element (0,0,2) - Nhắm vào dòng đầu hoặc chữ đầu (ví dụ minh họa phân cấp) */
+p::first-line { color: silver; }
+
+/* 3. Class Selector (0,1,0) */
+.text { color: blue; }
+
+/* 4. Hai Class Selector kết hợp (0,2,0) */
+.text.highlight { color: green; }
+
+/* 5. Pseudo-class kết hợp Class (0,2,0) - Cùng cấp với cái trên nhưng viết sau sẽ thắng */
+.text:not(:hover) { color: purple; }
+
+/* 6. Attribute Selector kết hợp Class (0,2,0) */
+.text[class~="highlight"] { color: orange; }
+
+/* 7. ID Selector (1,0,0) */
+#demo { color: brown; }
+
+/* 8. ID kết hợp Element (1,0,1) */
+p#demo { color: cyan; }
+
+/* 9. ID kết hợp Class (1,1,0) */
+#demo.text { color: magenta; }
+
+/* 10. Inline Style (Trực tiếp trong HTML) hoặc !important (Vô đối) */
+#demo.text.highlight { color: red; }
