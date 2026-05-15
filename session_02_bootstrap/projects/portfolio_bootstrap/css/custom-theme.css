@@ -343,3 +343,62 @@ footer {
   --bs-border-radius-lg: 16px; /* Cho cards */
   --bs-border-radius-md: 10px; /* Cho inputs */
 }
+
+/* Override Body & Reboot */
+body {
+  font-family: var(--bs-body-font-family);
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+/* 1. Override Primary Buttons */
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  border-radius: var(--bs-border-radius); /* 8px */
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: var(--bs-primary-hover);
+  border-color: var(--bs-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* 2. Custom Spacing & Utilities */
+.py-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* 3. Card Customization */
+.card {
+  border: none;
+  border-radius: var(--bs-border-radius-lg); /* 16px */
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08); /* Slate 900 shadow */
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* 4. Form Controls Customization */
+.form-control,
+.form-select {
+  border-radius: var(--bs-border-radius-md); /* 10px */
+  border: 1px solid #e2e8f0; /* Slate 200 */
+  padding: 0.6rem 1rem;
+}
+.form-control:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(20, 184, 166, 0.15);
+}
+
+/* 5. Custom Badge */
+.badge {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0.4em 0.8em;
+}
