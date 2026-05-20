@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout - E-Commerce Page</title>
+    <link rel="stylesheet" href="grid.css">
+</head>
+
+<body>
+
+    <div class="ecommerce-container">
+
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="brand">E-SHOP GRID</div>
+            <div class="search-bar"><input type="text" placeholder="Tìm kiếm sản phẩm..."></div>
+            <div class="cart-status">Giỏ hàng (0)</div>
+        </header>
+
+        <!-- HERO BANNER -->
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h1>SIÊU SALE ĐÓN HÈ!</h1>
+                <p>Giảm giá lên đến 50% cho toàn bộ các thiết bị công nghệ mới nhất.</p>
+                <button class="hero-btn">Khám phá ngay</button>
+            </div>
+
+            <!-- BONUS 5Đ: Card sản phẩm nổi bật chiếm diện tích lớn hơn (span 2 cột/hàng trong flex/grid nội bộ) -->
+            <div class="featured-product-card">
+                <span class="spotlight-tag">NỔI BẬT</span>
+                <div class="fp-image">IMAGE</div>
+                <div class="fp-info">
+                    <h3>MacBook Pro M3 Max</h3>
+                    <p class="fp-desc">Cấu hình khủng nhất dành cho dân chuyên nghiệp.</p>
+                    <p class="fp-price">69.990.000đ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIDEBAR (FILTER) -->
+        <aside class="sidebar-filter">
+            <h3>Bộ lọc sản phẩm</h3>
+            <div class="filter-group">
+                <h4>Danh mục</h4>
+                <label><input type="checkbox" checked> Tất cả</label>
+                <label><input type="checkbox"> Điện thoại</label>
+                <label><input type="checkbox"> Laptop</label>
+                <label><input type="checkbox"> Phụ kiện</label>
+            </div>
+            <div class="filter-group">
+                <h4>Khoảng giá</h4>
+                <label><input type="checkbox"> Dưới 5 triệu</label>
+                <label><input type="checkbox"> 5 - 15 triệu</label>
+                <label><input type="checkbox"> Trên 15 triệu</label>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT (PRODUCT CARDS) -->
+        <main class="main-products">
+            <h2 class="grid-title">Danh sách sản phẩm</h2>
+
+            <div class="products-subgrid">
+                <!-- Ít nhất 6 sản phẩm thực tế -->
+                <div class="item-card">
+                    <div class="item-img">CARD IMG</div>
+                    <h4>iPhone 15 Pro</h4>
+                    <p class="item-price">24.990.000đ</p>
+                </div>
+                <div class="item-card">
+                    <div class="item-img">CARD IMG</div>
+                    <h4>Samsung Galaxy S24</h4>
+                    <p class="item-price">21.490.000đ</p>
+                </div>
+                <div class="item-card">
+                    <div class="item-img">CARD IMG</div>
+                    <h4>Sony WH-G900N</h4>
+                    <p class="item-price">4.290.000đ</p>
+                </div>
+                <div class="item-card">
+                    <div class="item-img">CARD IMG</div>
+                    <h4>Garmin Venu 3</h4>
+                    <p class="item-price">11.990.000đ</p>
+                </div>
+                <div class="item-card">
+                    <div class="item-img">CARD IMG</div>
+                    <h4>Asus ROG Ally</h4>
+                    <p class="item-price">17.990.000đ</p>
+                </div>
+                <div class="item-card">
+                    <div class="item-img">CARD IMG</div>
+                    <h4>Mechanical Keyboard</h4>
+                    <p class="item-price">2.150.000đ</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- ADS SIDEBAR -->
+        <aside class="ads-banner">
+            <div class="ads-placeholder">
+                <p>QUẢNG CÁO</p>
+                <span class="ads-size">200 x 600</span>
+            </div>
+        </aside>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>© 2026 E-Shop Grid Layout. Tất cả quyền được bảo lưu.</p>
+            <p>Designed with CSS Grid System.</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
