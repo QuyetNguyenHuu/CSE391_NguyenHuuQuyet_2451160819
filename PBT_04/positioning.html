@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning Playground</title>
+    <link rel="stylesheet" href="positioning.css">
+</head>
+
+<body>
+
+    <!-- FIXED HEADER -->
+    <header class="main-header">
+        <div class="logo">MyLogo</div>
+        <nav class="navigation">
+            <a href="#">Trang chủ</a>
+            <a href="#">Sản phẩm</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="page-container">
+
+        <!-- STICKY SIDEBAR -->
+        <aside class="sticky-sidebar">
+            <h3>Danh mục</h3>
+            <ul>
+                <li><a href="#">Điện thoại</a></li>
+                <li><a href="#">Máy tính bảng</a></li>
+                <li><a href="#">Laptop</a></li>
+                <li><a href="#">Phụ kiện</a></li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT (Chứa Card sản phẩm và nội dung để cuộn trang) -->
+        <main class="main-content">
+            <h2>Sản phẩm nổi bật</h2>
+
+            <div class="product-grid">
+                <!-- PRODUCT CARD WITH ABSOLUTE BADGE -->
+                <div class="product-card">
+                    <span class="badge-hot">HOT</span>
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <h4>iPhone 15 Pro Max</h4>
+                        <p class="price">29.990.000đ</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <h4>iPad Air M2</h4>
+                        <p class="price">16.490.000đ</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Đoạn văn giả lập chiều dài trang web để tạo thanh cuộn (Scrollbar) -->
+            <div class="scroll-filler">
+                <h3>Cuộn xuống để kiểm tra thuộc tính Fixed và Sticky</h3>
+                <p>Nội dung giả lập 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sere do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.</p>
+                <p>Nội dung giả lập 2: Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat.</p>
+                <p>Nội dung giả lập 3: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+                <p>Nội dung giả lập 4: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.</p>
+                <p>Nội dung giả lập 5: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                    doloremque laudantium, totam rem aperiam.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+
+</body>
+
+</html>
