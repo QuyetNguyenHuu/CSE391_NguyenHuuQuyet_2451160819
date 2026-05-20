@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Navigation & Cards</title>
+    <link rel="stylesheet" href="flexbox.css">
+</head>
+
+<body>
+
+    <!-- PHẦN 1: FLEXBOX NAVBAR -->
+    <header class="navbar-container">
+        <!-- Nhóm trái: Logo -->
+        <div class="navbar-logo">
+            <a href="#">TECHSTORE</a>
+        </div>
+
+        <!-- Nhóm giữa: Menu Items -->
+        <nav class="navbar-menu">
+            <a href="#" class="menu-item">Home</a>
+            <a href="#" class="menu-item">Products</a>
+            <a href="#" class="menu-item">About</a>
+        </nav>
+
+        <!-- Nhóm phải: Auth Buttons -->
+        <div class="navbar-auth">
+            <button class="btn-login">Login</button>
+            <button class="btn-register">Register</button>
+        </div>
+    </header>
+
+    <!-- PHẦN 2: PRODUCT CARDS GRID (Chứa ít nhất 8 Cards) -->
+    <main class="main-wrapper">
+        <h2 class="section-title">Sản phẩm mới nhất</h2>
+
+        <div class="product-grid">
+            <!-- Card 1 -->
+            <div class="product-card">
+                <div class="product-image"><span>Product Image</span></div>
+                <div class="product-info">
+                    <h3 class="product-name">iPhone 15 Pro Max</h3>
+                    <p class="product-price">29.990.000đ</p>
+                </div>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="product-card">
+                <div class="product-image"><span>Product Image</span></div>
+                <div class="product-info">
+                    <h3 class="product-name">MacBook Air M3 (Tiêu đề dài giả lập hai dòng để test dính đáy)</h3>
+                    <p class="product-price">27.490.000đ</p>
+                </div>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="product-card">
+                <div class="product-image"><span>Product Image</span></div>
+                <div class="product-info">
+                    <h3 class="product-name">iPad Pro M4</h3>
+                    <p class="product-price">28.990.000đ</p>
+                </div>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="product-card">
+                <div class="product-image"><span>Product Image</span></div>
+                <div class="product-info">
+                    <h3 class="product-name">Apple Watch Ultra 2</h3>
+                    <p class="product-price">21.990.000đ</p>
+                </div>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="product-card">
+                <div class="product-image"><span>Product Image</span></div>
+                <div class="product-info">
+                    <h3 class="product-name">AirPods Pro Gen 2</h3>
+                    <p class="product-price">5.990.000đ</p>
+                </div>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="product-card">
+                <div class="product-image"><span>Product Image</span></div>
+                <div class="product-info">
+                    <h3 class="product-name">Sony WH-1000XM5</h3>
+                    <p class="product-price">8.490.000đ</p>
+                </div>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="product-card">
+                <div class="product-image"><span>Product Image</span></div>
+                <div class="product-info">
+                    <h3 class="product-name">Keychron K2 V2</h3>
+                    <p class="product-price">1.890.000đ</p>
+                </div>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="product-card">
+                <div class="product-image"><span>Product Image</span></div>
+                <div class="product-info">
+                    <h3 class="product-name">Logitech MX Master 3S</h3>
+                    <p class="product-price">2.490.000đ</p>
+                </div>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

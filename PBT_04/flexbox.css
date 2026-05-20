@@ -1,0 +1,208 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* ==========================================================================
+   PHẦN 1 — NAVBAR FLEXBOX
+   ========================================================================== */
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* Đẩy 3 nhóm sang Trái - Giữa - Phải */
+  align-items: center; /* Căn giữa hoàn hảo theo chiều dọc */
+  height: 70px;
+  background-color: #ffffff;
+  padding: 0 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Nhóm logo bên trái */
+.navbar-logo a {
+  font-size: 24px;
+  font-weight: 800;
+  color: #007bff;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+/* Nhóm menu items nằm giữa */
+.navbar-menu {
+  display: flex;
+  gap: 30px; /* Tạo khoảng cách đều nhau giữa các menu items */
+}
+
+.navbar-menu .menu-item {
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  text-decoration: none;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Hiệu ứng hover đổi màu + underline (gạch chân nghệ thuật) */
+.navbar-menu .menu-item:hover {
+  color: #007bff;
+}
+
+.navbar-menu .menu-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #007bff;
+  transition: width 0.2s ease;
+}
+
+.navbar-menu .menu-item:hover::after {
+  width: 100%; /* Kéo dài đường gạch chân khi hover */
+}
+
+/* Nhóm nút auth bên phải */
+.navbar-auth {
+  display: flex;
+  gap: 15px; /* Khoảng cách giữa 2 nút */
+}
+
+.navbar-auth button {
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-login {
+  background-color: transparent;
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+
+.btn-login:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.btn-register {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: #ffffff;
+}
+
+.btn-register:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* ==========================================================================
+   PHẦN 2 — PRODUCT CARDS GRID
+   ========================================================================== */
+.main-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Container dùng Flexbox wrap */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Khoảng cách ngang dọc đồng đều */
+}
+
+/* Mỗi card chiếm chuẩn tỷ lệ 4 cột trừ đi không gian của gap */
+.product-card {
+  flex: 0 0 calc(25% - 15px); /* Tính toán tự động: 25% trừ bớt phần chia của gap */
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* Thiết lập Flexbox trục dọc bên trong mỗi Card */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hiệu ứng Hover Card yêu cầu */
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Khối Ảnh (trên) */
+.product-image {
+  width: 100%;
+  height: 180px;
+  background-color: #f1f3f5;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #adb5bd;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Khối Tên + Giá (giữa) */
+.product-info {
+  margin-bottom: 20px;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #dc3545;
+}
+
+/* Nút "Mua" (dưới - luôn dính đáy nhờ margin-top: auto) */
+.btn-buy {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #343a40;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  /* ĐIỂM MẤT CHỐT: Tự động chiếm khoảng trống thừa phía trên để ghim chặt nút xuống đáy */
+  margin-top: auto;
+}
+
+.btn-buy:hover {
+  background-color: #212529;
+}
