@@ -1,0 +1,385 @@
+/* ==========================================================================
+   1. CSS NỀN TẢNG (BASE MẶC ĐỊNH CHO MOBILE - DƯỚI 768PX)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+/* Định dạng Ảnh/Khung chứa ảnh responsive theo đề bài */
+.image-placeholder {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3; /* Khóa tỷ lệ ảnh an toàn không méo */
+    background-color: #e5e7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #9ca3af;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+/* Sơ đồ trang trên Mobile: 1 cột chạy thẳng tuột xuống */
+.page-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+}
+
+/* HEADER TRÊN MOBILE */
+.app-header {
+    background-color: #111827;
+    color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.app-header .brand {
+    font-size: 20px; /* Font size di động */
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* Nút Hamburger ☰ */
+.hamburger-btn {
+    font-size: 24px;
+    cursor: pointer;
+    display: block;
+}
+
+.menu-checkbox {
+    display: none; /* Ẩn cái ô vuông check gốc đi */
+}
+
+/* Thanh menu gốc bị giấu kín trên mobile */
+.nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #1f2937;
+    flex-direction: column;
+    padding: 15px 0;
+    z-index: 999;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.nav-menu a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 25px;
+    font-size: 15px;
+}
+
+/* Cơ chế thuần CSS: Kích hoạt hiện menu khi tick vào nút hamburger */
+.menu-checkbox:checked ~ .nav-menu {
+    display: flex;
+}
+
+/* SIDEBAR: MẶC ĐỊNH ẨN TRÊN MOBILE THEO YÊU CẦU ĐỀ BÀI */
+.sidebar-filter {
+    display: none;
+}
+
+/* ADS BAR: MẶC ĐỊNH ẨN TRÊN MOBILE */
+.ads-bar {
+    display: none;
+}
+
+/* PRODUCT GRID TRÊN MOBILE: 1 CỘT CHUẨN */
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-title {
+    font-size: 15px; /* Font nhỏ cho mobile */
+    margin: 12px 0 6px 0;
+    font-weight: 600;
+}
+
+.product-price {
+    color: #dc2626;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.btn-action {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: auto; /* Ghém ghim dính đáy card */
+}
+
+/* FOOTER */
+.app-footer {
+    background-color: #1f2937;
+    color: #9ca3af;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+
+/* ==========================================================================
+   2. BREAKPOINT: TABLET (MÀN HÌNH TỪ 768PX ĐẾN 1023PX)
+   ========================================================================== */
+@media (min-width: 768px) {
+    /* Font size nền tảng tăng nhẹ */
+    .app-header .brand { font-size: 22px; }
+    .product-title { font-size: 16px; }
+    .product-price { font-size: 16px; }
+
+    /* Không gian bao quanh rộng rãi hơn */
+    .page-container {
+        padding: 20px;
+        gap: 20px;
+    }
+
+    /* Khóa nút hamburger lại trên tablet (Vẫn giữ nav dọc/ẩn hiện nhưng cấu trúc to rộng hơn) */
+    .nav-menu a {
+        padding: 15px 40px;
+        font-size: 16px;
+    }
+
+    /* HIỆN SIDEBAR: Dạng nằm ngang làm filter dropdown theo yêu cầu */
+    .sidebar-filter {
+        display: block;
+        background-color: #ffffff;
+        padding: 15px 20px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-title {
+        font-weight: 700;
+        font-size: 14px;
+        color: #4b5563;
+    }
+
+    .filter-options {
+        display: flex;
+        gap: 15px;
+    }
+
+    .filter-select {
+        flex: 1;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        outline: none;
+        background-color: #f9fafb;
+    }
+
+    /* PRODUCT GRID TRÊN TABLET: CHUYỂN CHUẨN THÀNH 2 CỘT */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+
+/* ==========================================================================
+   3. BREAKPOINT: DESKTOP (MÀN HÌNH TỪ 1024PX TRỞ LÊN)
+   ========================================================================== */
+@media (min-width: 1024px) {
+    /* Font size đạt mức tối đa */
+    .app-header .brand { font-size: 24px; }
+    .product-title { font-size: 17px; }
+    .product-price { font-size: 18px; }
+
+    /* CẤU TRÚC ĐẠI THỂ MẠNG LƯỚI CHÍNH (Macro Layout 3 cột ngang) */
+    .page-container {
+        grid-template-columns: 240px 1fr 200px; /* Sidebar | Grid chính | Ads Bar */
+        grid-template-areas: 
+            "header  header  header"
+            "sidebar main    ads"
+            "footer  footer  footer";
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    /* Phân bổ các khu vực khớp với sơ đồ đặt tên area */
+    .app-header      { grid-area: header; }
+    .sidebar-filter  { grid-area: sidebar; }
+    .product-main    { grid-area: main; }
+    .ads-bar         { grid-area: ads; }
+    .app-footer      { grid-area: footer; }
+
+    /* RESPONSIVE NAVIGATION: ẨN Hamburger, HIỆN menu ngang tràn rộng */
+    .hamburger-btn {
+        display: none; /* Ẩn hẳn nút ☰ */
+    }
+
+    .nav-menu {
+        display: flex !important; /* Ép buộc luôn hiển thị */
+        position: static;         /* Phá bỏ vị trí tuyệt đối của mobile */
+        flex-direction: row;      /* Quay về hàng ngang */
+        background-color: transparent;
+        padding: 0;
+        width: auto;
+        box-shadow: none;
+    }
+
+    .nav-menu a {
+        padding: 0 0 0 30px;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+    
+    .nav-menu a:hover {
+        color: #3b82f6;
+    }
+
+    /* SIDEBAR QUAY VỀ DẠNG DỌC KHUNG BÊN TRÁI TRUYỀN THỐNG */
+    .sidebar-filter {
+        height: fit-content;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .filter-options {
+        flex-direction: column; /* Đổi dropdown từ hàng ngang thành hàng dọc xếp chồng */
+        gap: 10px;
+    }
+
+    /* PRODUCT GRID TRÊN DESKTOP: BẬT MỨC TỐI ĐA 4 CỘT CARDS */
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .product-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* HIỆN ADS BAR KHUNG BÊN PHẢI CỦA DESKTOP */
+    .ads-bar {
+        display: block;
+        background-color: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        padding: 10px;
+        height: fit-content;
+    }
+
+    .ads-content {
+        position: relative;
+        width: 100%;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .ads-img {
+        /* Tuân thủ quy tắc ảnh responsive */
+        max-width: 100%;
+        height: auto;
+        display: block;
+        
+        /* Ép ảnh chạy dọc theo tỷ lệ banner đứng */
+        aspect-ratio: 1 / 2; 
+        object-fit: cover;
+        
+        /* Làm mờ nhẹ ảnh nền để chữ bên trên nổi bật lên */
+        filter: brightness(0.7); 
+    }
+
+    /* Lớp chữ thiết kế đè lên ảnh cho chuyên nghiệp */
+    .ads-overlay-text {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0 10px;
+    }
+
+    .ads-overlay-text span {
+        font-weight: 800;
+        font-size: 16px;
+        letter-spacing: 1px;
+        background-color: #dc2626; /* Nền đỏ chữ trắng nổi bật */
+        padding: 5px 10px;
+        border-radius: 4px;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    .ads-overlay-text small {
+        font-size: 11px;
+        opacity: 0.9;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+}
+
+/* ==========================================================================
+   CẤU HÌNH ẢNH RESPONSIVE THEO TIÊU CHUẨN ĐỀ BÀI
+   ========================================================================== */
+.card-img-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #f3f4f6;
+}
+
+.product-img {
+    /* Đạt điểm tuyệt đối tiêu chuẩn kỹ thuật đề bài giao */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    
+    /* Thuộc tính nâng cao giúp ảnh không bị méo, tự động cắt cúp vừa vặn tỷ lệ 4:3 */
+    aspect-ratio: 4 / 3;
+    object-fit: cover; 
+    
+    transition: transform 0.3s ease;
+}
+
+/* Hiệu ứng zoom nhẹ ảnh khi hover card trên Desktop */
+.product-card:hover .product-img {
+    transform: scale(1.05);
+}
