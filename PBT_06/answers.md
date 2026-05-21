@@ -1,5 +1,6 @@
-# Phần A
-## Câu A1
+# Track A
+## Phần A
+### Câu A1
 
 **Bảng Phân Tích Bố Cục Layout theo Breakpoints**
 
@@ -57,7 +58,7 @@ col-lg-3 ⇒ mỗi box chiếm 3/12 = 1/4 hàng.
     
     Do khoảng màn hình Small (sm - từ 576px đến 767px) vẫn nằm dưới mốc md (768px), nó sẽ tự động kế thừa (inherit) thuộc tính của class nhỏ hơn gần nhất là col-12. Việc viết col-sm-12 lúc này là hoàn toàn dư thừa vì trình duyệt vốn dĩ đã đang ép nó chạy full 12 cột rồi
 
-## Câu A2
+### Câu A2
 
 1. Giải thích class .d-none .d-md-block
 - Sự kết hợp của hai class này là một kỹ thuật responsive cực kỳ phổ biến để ẩn/hiện phần tử theo màn hình. Do viết theo tư duy Mobile-First (ưu tiên màn hình nhỏ), thuộc tính sẽ chạy từ bé đến lớn:
@@ -84,3 +85,93 @@ col-lg-3 ⇒ mỗi box chiếm 3/12 = 1/4 hàng.
 | `.container` | Cố định theo từng breakpoint, có `max-width` và tự căn giữa. | Có khoảng trắng 2 bên, giao diện gọn gàng trên Desktop. |
 | `.container-fluid` | Luôn rộng `100%` màn hình, không có `max-width`. | Nội dung kéo dài từ mép trái sang mép phải màn hình. |
 | `.container-md` | `<768px` full width, `>=768px` fixed width như `.container`. | Mobile hiển thị full màn hình, Desktop thì gom gọn ở giữa. |
+
+## Phần C
+
+### Câu C1
+
+1. Quy trình đổi màu $primary sang #E63946
+Để thay đổi tận gốc màu sắc chủ đạo của Bootstrap, bạn không sửa trực tiếp vào file mã nguồn của thư viện (vì khi cập nhật phiên bản mới sẽ bị ghi đè mất), mà thực hiện qua quy trình biên dịch Sass.
+
+**Các công cụ cần thiết:**
+- Node.js & npm để cài đặt trình biên dịch.
+
+- Bộ biên dịch Sass (Sass Compiler): Thường dùng thư viện sass (Dart Sass).
+
+- Mã nguồn Bootstrap Sass: Được cài đặt qua lệnh npm i bootstrap (thư mục nằm trong node_modules/bootstrap/scss/).
+
+**Các file cần tạo và chỉnh sửa:**
+
+- Cần tạo một file stylesheet riêng cho dự án, ví dụ: scss/custom.scss. Cấu trúc code viết trong file này phải tuân theo thứ tự sau:
+
+```scss
+// 1. Khai báo mã màu mới
+$custom-primary: #E63946;
+
+// 2. Ghi đè vào biến hệ thống $primary của Bootstrap
+$primary: $custom-primary;
+
+// 3. Tiến hành import file cấu hình tổng của Bootstrap vào sau
+// Đường dẫn trỏ vào thư mục node_modules nơi cài đặt Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+```
+
+**Bước biên dịch:**
+
+- Chạy lệnh Terminal để biên dịch file SCSS tùy biến thành file CSS thuần cho trình duyệt đọc:
+
+```bash
+    sass scss/custom.scss dist/css/bootstrap.custom.css
+```
+
+- Sau đó nhúng file bootstrap.custom.css này vào HTML là toàn bộ hệ thống đã chuyển sang màu đỏ mới.
+
+2. Tại sao KHÔNG nên override trực tiếp bằng CSS thuần?
+
+**Vì:**
+
+- Hiệu ứng dây chuyền (Hệ sinh thái biến số)
+Trong Bootstrap, biến $primary không chỉ nuôi duy nhất một mình cái nút .btn-primary. Màu sắc này được liên kết tự động qua các hàm Sass để tạo ra hàng loạt thành phần khác:
+
+- Các trạng thái tương tác: Màu khi :hover, :active, :focus (nút bấm sẽ tự đậm lên hoặc nhạt đi).
+
+- Các biến thể component: Nút dạng viền .btn-outline-primary, màu nền thông báo .bg-primary, màu chữ định dạng .text-primary, viền khung .border-primary.
+
+- Các thành phần giao diện khác: Thanh tiến trình (progress-bar), thẻ màu (card), các icon điều hướng (nav-link).
+
+### Câu C2
+
+1. Bản đối chiếu kỹ thuật tổng quan
+
+| Tiêu chí | Viết bằng CSS thuần | Viết bằng Bootstrap |
+|---|---|---|
+| Cơ chế triển khai | Phải tự xây dựng layout bằng Flexbox/Grid và tự viết `@media` để responsive. | Dùng các class có sẵn như `.container`, `.row`, `.col-md-4`, `.navbar`. |
+| Số dòng CSS cần viết | Nhiều dòng CSS để xử lý layout, khoảng cách, hiệu ứng và responsive. | Gần như không cần viết CSS vì Bootstrap đã cung cấp sẵn. |
+| Thời gian phát triển | Chậm hơn vì phải tự căn chỉnh và test trên nhiều kích thước màn hình. | Nhanh hơn do chỉ cần ghép đúng class theo tài liệu Bootstrap. |
+| Khả năng tùy biến | Rất linh hoạt, có thể thiết kế độc quyền theo ý muốn. | Bị phụ thuộc vào hệ thống class và phong cách của Bootstrap. |
+| Độ khó bảo trì | Khó bảo trì khi dự án lớn vì CSS dễ bị chồng chéo. | Dễ bảo trì hơn nhờ cấu trúc class thống nhất. |
+| Tốc độ học | Cần hiểu sâu về CSS, Flexbox, Grid và Responsive Design. | Dễ tiếp cận hơn cho người mới học frontend. |
+| Hiệu năng | Nhẹ hơn nếu chỉ viết đúng phần cần dùng. | File CSS lớn hơn vì chứa nhiều class dựng sẵn. |
+| Trường hợp phù hợp | Website cần giao diện riêng biệt hoặc tối ưu hiệu năng. | Prototype nhanh, dashboard, admin hoặc website doanh nghiệp. |
+
+2. Đánh giá sâu về các khía cạnh phát triển
+
+**Khả năng tùy biến (Customization)**
+- CSS thuần (Thắng thế): Đạt điểm 10/10 về sự tự do. Bạn có thể vẽ bất kỳ hình thù gì, bo góc tùy ý, tạo hiệu ứng chuyển động độc lạ mà không bị gò bó bởi bất kỳ quy chuẩn nào. Code chạy nhẹ vì chỉ chứa đúng những thuộc tính bạn cần.
+
+- Bootstrap (Hạn chế hơn): Đạt 7/10. Giao diện mặc định của Bootstrap mang đậm tính "công nghiệp" (nhìn vào là biết ngay dùng Bootstrap). Để đổi màu hay đổi kiểu bo góc theo ý muốn của Designer, bạn buộc phải học cách ghi đè (override) biến số Sass như đã phân tích ở câu trước, nếu không code sẽ bị phình to và chắp vá.
+
+**Khi nào NÊN dùng Bootstrap?**
+
+- Dự án cần làm nhanh (Deadline gấp): Các dự án xây dựng trang quản trị (Admin Dashboard), trang nội bộ doanh nghiệp, hoặc sản phẩm chạy thử nghiệm (MVP) để gọi vốn.
+
+- Làm việc nhóm đông người (Teamwork): Khi mọi lập trình viên đều tuân theo chuẩn lưới của Bootstrap, người này vào đọc code của người kia sẽ hiểu ngay lập tức mà không mất thời gian làm quen với cách đặt tên class riêng của bạn.
+
+- Kỹ năng CSS ở mức cơ bản: Bootstrap lo hết phần responsive phức tạp, giúp bạn né được các lỗi vỡ layout sơ đẳng trên màn hình di động.
+
+**Khi nào KHÔNG NÊN dùng Bootstrap?**
+
+- Trang web đòi hỏi thiết kế độc bản (Creative/Creative Agency): Những trang Landing Page quảng cáo sản phẩm thời trang cao cấp, portfolio nghệ thuật, hoặc trang web có hiệu ứng phức tạp 3D. Việc ép Bootstrap vào những giao diện này sẽ làm thui chột khả năng sáng tạo.
+
+- Cần tối ưu tốc độ tải trang tuyệt đối (Performance): Bootstrap đi kèm với một tệp CSS và JS tổng khá nặng chứa hàng ngàn class mà bạn không bao giờ dùng tới. Nếu dự án yêu cầu tối ưu SEO core web vitals ở mức cực đoan, tự viết CSS sạch sẽ, tinh gọn là lựa chọn thông minh hơn.
+
