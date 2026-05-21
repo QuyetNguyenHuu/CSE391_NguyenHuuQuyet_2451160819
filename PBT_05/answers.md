@@ -189,3 +189,127 @@ $spacing-lg: 20px;
 2. Dùng Node-Sass / Dart-Sass: Chạy câu lệnh qua Terminal bằng npm: `sass style.scss style.css`.
 
 3. Dùng Bundler tự động: Tích hợp vào các công cụ đóng gói mã nguồn như Vite, Webpack,
+
+# Phần C
+
+## Câu C1 — Phân tích trang web thực VnExpress
+
+**Kết quả quan sát trên 3 kích thước màn hình**
+
+1. Màn hình Mobile (375px)
+
+- Navigation: Thanh menu ngang của bản Desktop biến mất hoàn toàn. Thay vào đó là một nút bấm Hamburger (☰) gọn gàng nằm ở góc trên cùng. Khi nhấn vào nút này, một danh mục đầy đủ các chuyên mục (Thời sự, Thế giới, Kinh doanh...) sẽ trượt ra chiếm toàn màn hình hoặc một góc màn hình.
+
+- Lưới Content: Chuyển hoàn toàn về cấu trúc 1 cột duy nhất. Các bài viết không còn xếp song song mà được xếp chồng lên nhau từ trên xuống dưới để tối ưu hóa không gian cuộn dọc trên điện thoại.
+
+- Elements bị ẩn: Các banner quảng cáo lớn ở hai bên sườn (Ads), block "Xem nhiều nhất" ở cột phụ, và một số widget tiện ích phức tạp (Bảng giá vàng, Thời tiết chi tiết) bị ẩn hoàn toàn để giảm dung lượng tải trang và tránh làm loãng nội dung.
+
+- Font size: Tiêu đề bài viết lớn (H1/H2) được thu nhỏ lại (khoảng 18px - 20px) để không bị tràn dòng hoặc ngắt chữ xuống dòng quá vụn vặt.
+
+2. Màn hình Tablet (768px)
+
+- Navigation: Thanh menu chính bắt đầu xuất hiện lại dưới dạng nằm ngang nhưng chỉ hiển thị các chuyên mục cốt lõi nhất (Thời sự, Góc nhìn, Thế giới...). Các chuyên mục phụ được giấu gọn vào một nút "Tất cả" hoặc nút ba chấm ở cuối thanh menu.
+
+- Lưới Content: Chuyển sang cấu trúc 2 cột. Cột chính bên trái chiếm khoảng 70% độ rộng để hiển thị danh sách bài viết hot, cột bên phải chiếm 30% hiển thị các tin ngắn, tin video hoặc dòng sự kiện tiêu điểm.
+
+- Elements bị ẩn: Quảng cáo chạy dọc hai bên sườn (Banner dọc) vẫn bị ẩn vì không gian bề ngang chưa đủ rộng, nhưng khối "Xem nhiều nhất" hoặc "Ý kiến bạn đọc" ở cột phụ đã được hiển thị trở lại.
+
+- Font size: Kích thước chữ tiêu đề tăng lên mức trung bình (khoảng 22px - 24px), khoảng cách giữa các dòng (line-height) giãn rộng hơn giúp trải nghiệm đọc trên máy tính bảng rất thông thoáng.
+
+3. Màn hình Desktop (1440px)
+
+- Navigation: Hiển thị đầy đủ 100% thanh menu điều hướng nằm ngang với tất cả các chuyên mục chính. Khi di chuột (hover) vào một chuyên mục, một dropdown menu lớn (Mega Menu) sẽ đổ xuống hiển thị thêm các danh mục con bên trong.
+
+- Lưới Content: Đạt cấu trúc hoàn chỉnh 3 cột hoặc bố cục mạng lưới phức tạp (Macro Layout). Cột 1 là bài viết tiêu điểm lớn nhất, cột 2 là danh sách bài tin mới liên tục, cột 3 (Sidebar) là các hộp thông tin tiện ích, dòng sự kiện và danh sách tin đọc nhiều.
+
+- Elements bị ẩn: Không có phần tử nào bị ẩn. Hai bên rìa trái và phải của trang web xuất hiện khoảng không trống để hiển thị các banner quảng cáo khổng lồ bám theo màn hình khi cuộn chuột (Sticky Ads).
+
+- Font size: Chữ tiêu đề đạt kích thước chuẩn tối đa (khoảng 28px - 32px), định dạng chữ đậm, tạo điểm nhấn thị giác mạnh mẽ giúp người đọc quét nhanh được các tin tức nóng trong ngày.
+
+## Câu C2
+
+1. WIREFRAME — MOBILE (Màn hình dọc, 1 cột chồng)
+
+┌──────────────────────────────────────┐
+│ [LOGO]                               │ -> Header xếp dọc gọn gàng
+│ [HOTLINE: 090xxxxxxx]                │
+├──────────────────────────────────────┤
+│                                      │
+│             HERO IMAGE               │ -> Chiều cao vừa phải (40vh)
+│      "Chào mừng đến với Nhà Hàng"    │
+│                                      │
+├──────────────────────────────────────┤
+│ [Ảnh Món 1]                          │
+├──────────────────────────────────────┤
+│ [Ảnh Món 2]                          │ -> Lưới món ăn xếp dọc hoàn toàn
+│ [Ảnh Món 3]                          │    thành 1 cột để cuộn dọc dễ dàng
+│ [Ảnh Món 4]                          │    bằng ngón tay cái.
+│ [Ảnh Món 5]                          │
+├──────────────────────────────────────┤
+│ ┌──────────────────────────────────┐ │
+│ │          FORM ĐẶT BÀN            │ │ -> Form chiếm 100% chiều ngang
+│ │ Ngày: [__]     Giờ: [__]         │ │    nằm ngay dưới menu để thúc đẩy
+│ │ Số người: [__]                   │ │    khách hàng đặt bàn.
+│ │ [ ĐẶT BÀN NGAY ]                 │ │
+│ └──────────────────────────────────┘ │
+├──────────────────────────────────────┤
+│                                      │
+│          GOOGLE MAPS EMBED           │ -> Bản đồ co giãn full chiều rộng
+│                                      │
+├──────────────────────────────────────┤
+│               FOOTER                 │
+└──────────────────────────────────────┘
+
+2. WIREFRAME — TABLET (Màn hình vừa, bắt đầu chia cột)
+
+┌──────────────────────────────────────────────────────────────────┐
+│ [LOGO]                                    [HOTLINE: 090xxxxxxx]  │ -> Header dạng Ngang
+├──────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│                           HERO IMAGE                             │ -> Chiều cao trung bình (50vh)
+│                                                                  │
+├──────────────────────────────────────────────────────────────────┤
+│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐│
+│  │   [Ảnh Món 1]    │  │   [Ảnh Món 2]    │  │   [Ảnh Món 3]    ││ -> Lưới ảnh món ăn bẻ thành
+│  ├──────────────────┤  ├──────────────────┤  ├──────────────────┤│    3 cột x 1 hàng (hoặc 2 hàng)
+│  │   [Ảnh Món 4]    │  │   [Ảnh Món 5]    │  │   [Ảnh Món 6]    ││    cực kỳ cân đối.
+│  └──────────────────┘  └──────────────────┘  └──────────────────┘│
+├──────────────────────────────────────────────────────────────────┤
+│┌───────────────────────────────┐ ┌──────────────────────────────┐│
+││         FORM ĐẶT BÀN          │ │                              ││ -> Form và Bản đồ được xếp
+││ Ngày: [__]     Giờ: [__]      │ │      GOOGLE MAPS EMBED       ││    song song tỉ lệ 50/50 
+││ Số người: [__]                │ │                              ││    để tận dụng bề ngang màn hình.
+││ [ ĐẶT BÀN NGAY ]              │ │                              ││
+│└───────────────────────────────┘ └──────────────────────────────┘│
+├──────────────────────────────────────────────────────────────────┤
+│                              FOOTER                              │
+└──────────────────────────────────────────────────────────────────┘
+
+3. WIREFRAME — DESKTOP (Màn hình lớn, cấu trúc Main + Sidebar)
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ [LOGO]                  [Trang Chủ]  [Thực Đơn]  [Về Chúng Tôi]            [HOTLINE: 090xxxxxxx] │
+├──────────────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                                  │
+│                                           HERO IMAGE                                             │
+│                                                                                                  │
+├──────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ ┌──────────────────────────────────────────────────────────────┐ ┌─────────────────────────────┐ │
+│ │                     [CỘT TRÁI - MAIN CONTENT]                │ │     [CỘT PHẢI - STICKY]     │ │
+│ │                                                              │ │                             │ │
+│ │  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐     │ │    ┌───────────────────┐    │ │
+│ │  │  [Ảnh Món 1]  │  │  [Ảnh Món 2]  │  │  [Ảnh Món 3]  │     │ │    │   FORM ĐẶT BÀN    │    │ │
+│ │  ├───────────────┤  ├───────────────┤  ├───────────────┤     │ │    │                   │    │ │
+│ │  │  [Ảnh Món 4]  │  │  [Ảnh Món 5]  │  │  [Ảnh Món 6]  │     │ │    │ Ngày: [__]        │    │ │
+│ │  └───────────────┘  └───────────────┘  └───────────────┘     │ │    │ Giờ:  [__]        │    │ │
+│ │                                                              │ │    │ Khách: [__]       │    │ │
+│ │  ┌────────────────────────────────────────────────────────┐  │ │    │                   │    │ │
+│ │  │                                                        │  │ │    │ [ ĐẶT BÀN NGAY ]  │    │ │
+│ │  │                   GOOGLE MAPS EMBED                    │  │ │    │                   │    │ │
+│ │  │                                                        │  │ │    └───────────────────┘    │ │
+│ │  └────────────────────────────────────────────────────────┘  │ │                             │ │
+│ └──────────────────────────────────────────────────────────────┘ └─────────────────────────────┘ │
+├──────────────────────────────────────────────────────────────────────────────────────────────────┤
+│                                              FOOTER                                              │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
