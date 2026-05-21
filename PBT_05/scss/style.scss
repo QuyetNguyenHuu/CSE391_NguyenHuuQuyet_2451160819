@@ -1,0 +1,13 @@
+// Nạp các file cấu hình và tính năng bổ trợ trước
+@import 'variables';
+@import 'mixins';
+
+// Thiết lập định dạng toàn cục
+body {
+    background-color: $bg-light;
+    color: $text-color;
+    font-family: $font-primary;
+}
+
+// Nạp các cấu phần giao diện
+@import 'components';

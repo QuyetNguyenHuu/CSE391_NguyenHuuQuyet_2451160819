@@ -1,0 +1,23 @@
+// 1. Mixin Responsive Media Queries (Mobile-First)
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == "tablet" {
+        @media (min-width: $breakpoint-tablet) { @content; }
+    } @else if $breakpoint == "desktop" {
+        @media (min-width: $breakpoint-desktop) { @content; }
+    }
+}
+
+// 2. Mixin Căn giữa nhanh bằng Flexbox
+@mixin flex-center($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: center;
+    align-items: center;
+}
+
+// 3. Mixin tạo đổ bóng Card sang trọng (Độ sâu loang mịn)
+@mixin card-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}

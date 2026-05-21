@@ -313,3 +313,18 @@ $spacing-lg: 20px;
 │                                              FOOTER                                              │
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 
+# Phần B
+
+## Bài B3
+
+**Báo cáo kết quả Refactor SCSS → CSS**
+
+1. Công cụ sử dụng biên dịch
+Hệ thống sử dụng bộ biên dịch chuẩn **Dart Sass** (hoặc Extension **Live Sass Compiler** trên VS Code) để chuyển đổi cấu trúc mã.
+
+2. Câu lệnh biên dịch (Compile Command)
+Để biên dịch file `style.scss` nằm trong thư mục `scss` ra tệp `style.css` thuần túy ở thư mục bên ngoài, chạy câu lệnh sau trong Terminal:
+
+```bash
+sass scss/style.scss style.css
+```
