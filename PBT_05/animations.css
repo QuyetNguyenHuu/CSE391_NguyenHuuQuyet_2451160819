@@ -1,0 +1,173 @@
+/* Reset CSS & Thiết lập chung */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    padding: 40px 20px;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   HIỆU ỨNG 1: CARD HOVER EFFECT
+   ========================================================================== */
+.product-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    width: 320px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    
+    /* Yêu cầu: transition mượt mà cho mọi thuộc tính thay đổi */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+/* Khi di chuột vào Card: nhấc nhẹ lên và đổ bóng sâu hơn */
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* ==========================================================================
+   HIỆU ỨNG 2: BUTTON HOVER (NÚT "MUA NGAY")
+   ========================================================================== */
+.card-body {
+    padding: 20px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.product-price {
+    color: #ef4444;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn-buy {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #1e293b; /* Màu gốc: Đậm */
+    color: #ffffff;            /* Chữ gốc: Trắng */
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    
+    /* Thiết lập chuyển động mượt cho cả background, color và transform */
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+/* Khi hover vào nút bấm */
+.btn-buy:hover {
+    background-color: #3b82f6; /* Đổi mượt sang màu xanh dương */
+    color: #ffffff;
+    transform: scale(1.05);    /* Phóng to nhẹ 5% */
+}
+
+/* ==========================================================================
+   HIỆU ỨNG 3: IMAGE ZOOM (HOVER ẢNH SẢN PHẨM)
+   ========================================================================== */
+.card-img-container {
+    width: 100%;
+    height: 240px;
+    background-color: #f8fafc;
+    
+    /* Yêu cầu bắt buộc: khóa biên để ảnh zoom không tràn ra ngoài card */
+    overflow: hidden; 
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    /* Cài đặt thời gian biến đổi cho tấm ảnh */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Đích danh hiệu ứng: Chỉ phóng to ảnh khi lớp cha (.product-card) được hover */
+.product-card:hover .product-img {
+    transform: scale(1.1); /* Phóng to ảnh thêm 10% */
+}
+
+/* ==========================================================================
+   HIỆU ỨNG 4: LOADING SPINNER (XUẤT HIỆN KHI TẢI TRANG)
+   ========================================================================== */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.loading-spinner {
+    width: 45px;
+    height: 45px;
+    border: 4px solid #cbd5e1;       /* Đường viền nền nhạt */
+    border-top: 4px solid #3b82f6;   /* Điểm nhấn viền màu xanh để tạo độ xoay */
+    border-radius: 50%;              /* Ép thành hình tròn hoàn hảo */
+    
+    /* Yêu cầu: áp dụng vòng lặp animation liên tục */
+    animation: spin 1s linear infinite; 
+}
+
+/* Khai báo trục Keyframes xoay 360 độ */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   HIỆU ỨNG 5: FADE-IN KHI SCROLL/TẢI TRANG (PURE CSS)
+   ========================================================================== */
+.animated-fade-in {
+    /* Đưa trạng thái thực thi Keyframes vào lớp phủ nội dung */
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Cấu trúc Keyframes đi từ mờ/lệch -> rõ nét/chuẩn vị trí */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Đẩy nhẹ xuống dưới 20px */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);    /* Trở về vị trí gốc */
+    }
+}

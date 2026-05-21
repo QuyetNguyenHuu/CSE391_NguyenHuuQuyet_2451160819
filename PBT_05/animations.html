@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Transitions & Animations Playground</title>
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+
+    <!-- HIỆU ỨNG 4: LOADING SPINNER (Xuất hiện trên cùng khi trang tải) -->
+    <div class="loader-container">
+        <div class="loading-spinner"></div>
+        <p>Đang tải sản phẩm...</p>
+    </div>
+
+    <!-- MAIN CONTAINER (HIỆU ỨNG 5: Áp dụng hiệu ứng Fade-in toàn cục khi tải/scroll trang) -->
+    <main class="main-content animated-fade-in">
+        
+        <h1 class="page-title">Cửa Hàng Trải Nghiệm Hiệu Ứng</h1>
+        
+        <div class="product-grid">
+            
+            <!-- PRODUCT CARD CHỨA ĐẦY ĐỦ HIỆU ỨNG 1, 2, 3 -->
+            <div class="product-card">
+                <!-- HIỆU ỨNG 3: CONTAINER GIẤU CẠNH ĐỂ ZOOM ẢNH -->
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80" alt="Giày thể thao Red Sneaker" class="product-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-name">Air Max Red Elite</h3>
+                    <p class="product-price">3.490.000đ</p>
+                    <!-- HIỆU ỨNG 2: BUTTON HOVER EFFECT -->
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+
+            <!-- Card sản phẩm số 2 để tạo lưới hoàn chỉnh -->
+            <div class="product-card">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Đồng hồ thông minh Smart Watch" class="product-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-name">Minimalist Smart Watch</h3>
+                    <p class="product-price">1.890.000đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+
+            <!-- Card sản phẩm số 3 -->
+            <div class="product-card">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Tai nghe chụp tai Headphone" class="product-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-name">Wireless Studio Headphone</h3>
+                    <p class="product-price">2.250.000đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
