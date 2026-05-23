@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid;
+  padding: 12px 15px;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.btn-them {
+  margin-bottom: 10px;
+}
+
+.bg-blue {
+  background-color: rgba(46, 130, 227, 0.833);
+}
+
+.bg-gray {
+  background-color: rgba(128, 128, 128, 0.897);
+}
+
+.bg-red {
+  background-color: rgb(242, 69, 69);
+}
+
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+
+.justify-content-between{
+  justify-content: space-between;
+}
+
+.box {
+  padding: 10px 20px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.box-modal{
+  width: 300px;
+  border: 2px solid rgba(37, 37, 245, 0.575);
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.flex-column{
+  flex-direction: column;
+}
+
+.header-form{
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.523);
+}
+
+.py-5{
+  padding: 5px 0 0;
+}
+
+.btn-close{
+  padding: 5px;
+  border: none;
+  background: none;
+  color: rgba(128, 128, 128, 0.838);
+  cursor: pointer;
+}
+
+.gap-10{
+  gap: 10px;
+}
+
+/* Lớp phủ mờ toàn màn hình */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền đen mờ */
+    display: none; /* Mặc định ẩn đi */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Thêm class này bằng JS để hiển thị modal */
+.modal-overlay.active {
+    display: flex;
+}
+
+/* Hộp thoại form nằm ở giữa */
+.box-modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 350px; /* Chiều rộng tối đa của form */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.success {
+    color: green;
+    font-size: 0.9em;
+    margin-top: 5px;
+}

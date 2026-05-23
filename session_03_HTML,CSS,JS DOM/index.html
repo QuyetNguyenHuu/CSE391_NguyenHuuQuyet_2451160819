@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sinh viên</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Quản lý sinh viên</h1>
+    <div class="container">
+        <div class="d-flex justify-content-evenly">
+            <div class="box">
+                <h3>Tổng số</h3>
+                <p id="total-students">0</p>
+            </div>
+            <div class="box">
+                <h3>Điểm TB</h3>
+                <p id="average-score">0</p>
+            </div>
+        </div>
+        <div class="btn-them d-flex justify-content-end">
+            <button id="btnThem" class="btn bg-blue">Thêm sinh viên</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã sinh viên</th>
+                    <th>Họ và tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Lớp học</th>
+                    <th>Điểm trung bình</th>
+                    <th>Email</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="list-students"></tbody>
+        </table>
+    </div>
+
+    <div id="modalStudent" class="modal-overlay">
+        <div class="box-modal">
+            <div class="header-form d-flex justify-content-between">
+                <h3 id="modal-title">Thêm sinh viên</h3>
+                <button class="btn-close">X</button>
+            </div>
+            <form id="form-student" action="/" method="get" novalidate>
+                <input type="hidden" id="edit-index" value="">
+
+                <div class="d-flex flex-column py-5">
+                    <label for="ma-sv">Mã sinh viên</label>
+                    <input type="text" name="ma-sv" id="ma-sv" placeholder="SV001">
+                    <div class="error" id="error-ma-sv"></div>
+                </div>
+                <div class="d-flex flex-column py-5">
+                    <label for="ho-ten">Họ tên</label>
+                    <input type="text" name="ho-ten" id="ho-ten" required placeholder="Nguyễn Văn A">
+                    <div class="error" id="error-ho-ten"></div>
+                </div>
+                <div class="d-flex flex-column py-5">
+                    <label for="ngay-sinh">Ngày sinh</label>
+                    <input type="date" required name="ngay-sinh" id="ngay-sinh">
+                    <div class="error" id="error-ngay-sinh"></div>
+                </div>
+                <div class="d-flex flex-column py-5">
+                    <label for="lop">Lớp học</label>
+                    <input type="text" required name="lop" id="lop" placeholder="CNTT1">
+                    <div class="error" id="error-lop"></div>
+                </div>
+                <div class="d-flex flex-column py-5">
+                    <label for="diem-tb">Điểm trung bình</label>
+                    <input type="number" required name="diem-tb" id="diem-tb" placeholder="8" min="0" max="10" step="0.1">
+                    <div class="error" id="error-diem-tb"></div>
+                </div>
+                <div class="d-flex flex-column py-5">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required placeholder="a@gmail.com">
+                    <div class="error" id="error-email"></div>
+                </div>
+                <div class="d-flex justify-content-end py-5 gap-10">
+                    <button type="button" class="btn-close-footer btn bg-gray">Đóng</button>
+                    <button type="submit" id="btn-submit" class="btn bg-blue">Lưu</button>
+                </div>
+                <p class="success" id="js-success"></p>
+            </form>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
