@@ -18,7 +18,7 @@
 
 ## 1. Tại sao component chỉ render 1 lần?
 
-Vì **dữ liệu của component chưa có bất kỳ sự thay đổi nào**.
+Vì **dữ liệu của component chưa có bất kỳ sự thay đổi nào**
 
 Khi ứng dụng vừa chạy (hoặc khi bạn F5 refresh trang), React chỉ thực hiện chu trình khởi tạo ban đầu (Mounting): nó gọi hàm `LifecycleDemo()`, lấy đống JSX đem đi vẽ lên màn hình đúng **1 lần duy nhất**, sau đó đứng im chờ đợi.
 
