@@ -223,3 +223,86 @@ console.log(product.specs.ram);
 // Object lồng bên trong là `specs` không được nhân bản mà chỉ sao chép địa chỉ vùng nhớ (tham chiếu).
 // Vì vậy, cả `copy.specs` và `product.specs` đều trỏ chung vào một nơi; sửa một bên, bên còn lại sẽ bị đổi theo!)
 ```
+
+# Phần C
+
+## Câu C1
+
+```js
+const processOrders = (orders) =>
+  orders
+    .filter(({ status, total }) => status === "completed" && total > 100000)
+    .map(({ id, customer, total }) => ({
+      id,
+      customer,
+      total,
+      discount: total * 0.1,
+      finalTotal: total * 0.9,
+    }))
+    .sort((a, b) => b.finalTotal - a.price || b.finalTotal - a.finalTotal);
+```
+
+## Câu C2
+
+```js
+const miniArray = {
+  // 1. Tự viết hàm map
+  map(arr, fn) {
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+      // Thực thi hàm callback với 3 tham số chuẩn: phần tử hiện tại, chỉ số, mảng gốc
+      result.push(fn(arr[i], i, arr));
+    }
+    return result;
+  },
+
+  // 2. Tự viết hàm filter
+  filter(arr, fn) {
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+      // Nếu hàm callback trả về giá trị truthy, thêm phần tử đó vào mảng kết quả
+      if (fn(arr[i], i, arr)) {
+        result.push(arr[i]);
+      }
+    }
+    return result;
+  },
+
+  // 3. Tự viết hàm reduce (Xử lý trường hợp có hoặc không có initialValue)
+  reduce(arr, fn, initialValue) {
+    // Kiểm tra xem người dùng có truyền vào giá trị khởi tạo hay không
+    const hasInitialValue = initialValue !== undefined;
+
+    // Nếu không có initialValue và mảng rỗng thì ném lỗi y hệt như hàm built-in
+    if (arr.length === 0 && !hasInitialValue) {
+      throw new TypeError("Reduce of empty array with no initial value");
+    }
+
+    // Đặt giá trị tích lũy ban đầu và chỉ số bắt đầu vòng lặp
+    let accumulator = hasInitialValue ? initialValue : arr[0];
+    let startIndex = hasInitialValue ? 0 : 1;
+
+    for (let i = startIndex; i < arr.length; i++) {
+      // Cập nhật giá trị tích lũy qua từng vòng lặp
+      accumulator = fn(accumulator, arr[i], i, arr);
+    }
+    return accumulator;
+  },
+};
+
+console.log("--- TEST MAP ---");
+console.log(miniArray.map([1, 2, 3], (x) => x * 2));
+// OUTPUT: [2, 4, 6]
+
+console.log("\n--- TEST FILTER ---");
+console.log(miniArray.filter([1, 2, 3, 4], (x) => x > 2));
+// OUTPUT: [3, 4]
+
+console.log("\n--- TEST REDUCE ---");
+console.log(miniArray.reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+// OUTPUT: 10
+
+// Test bổ sung cho trường hợp Reduce KHÔNG CÓ initialValue
+console.log(miniArray.reduce([1, 2, 3, 4], (a, b) => a + b));
+// OUTPUT: 10 (Hợp lệ: lấy phần tử đầu tiên làm giá trị tích lũy ban đầu)
+```
