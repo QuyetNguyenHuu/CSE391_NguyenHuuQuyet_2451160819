@@ -128,3 +128,61 @@ var html = `
 </div>
 `;
 ```
+
+# Phần C
+
+## Câu C1
+
+1. Danh sách các lỗi và cách sửa
+
+**Lỗi 1:** Gộp dòng code (Cú pháp)
+
+- Vị trí: return giaSauGiam}// Testconst gia = ...
+
+- Giải thích: Việc viết gộp dòng mà thiếu dấu chấm phẩy ; hoặc xuống dòng khiến JavaScript hiểu sai cú pháp, dẫn đến lỗi SyntaxError: Unexpected token 'const'.
+
+- Cách sửa: Xuống dòng và định dạng lại code cho rõ ràng.
+
+**Lỗi 2:** Sử dụng toán tử gán thay vì toán tử so sánh (Logic)
+
+- Vị trí: if (giaSauGiam = 0)
+
+- Giải thích: Dấu = là toán tử gán, không phải toán tử so sánh. Câu lệnh này đang gán giá trị 0 cho biến giaSauGiam. Trong JavaScript, 0 là một giá trị falsy, nên khối lệnh if sẽ không bao giờ được chạy, đồng thời làm thay đổi giá trị của giaSauGiam thành 0.
+
+- Cách sửa: Đổi thành toán tử so sánh nghiêm ngặt === (hoặc ==).
+
+**Lỗi 3:** Truyền sai kiểu dữ liệu (Logic)
+
+- Vị trí: const gia = tinhGiaGiamGia("100000", 20)
+
+- Giải thích: giaBan được truyền vào dưới dạng một chuỗi (String) "100000". Dù JavaScript có cơ chế tự động ép kiểu khi thực hiện phép tính \* và /, việc truyền sai kiểu dữ liệu rất dễ gây lỗi logic khi mở rộng code (ví dụ nếu có phép cộng +, nó sẽ bị hiểu nhầm thành nối chuỗi).
+
+- Cách sửa: Đổi thành kiểu số (Number): 100000.
+
+**Lỗi 4:** Thiếu dấu chấm phẩy ngăn cách lệnh trên cùng một dòng (Cú pháp)
+
+- Vị trí: console.log("Giá sau giảm: " + gia + "đ")const gia2 = ...
+
+- Giải thích: Hai câu lệnh console.log(...) và const gia2 = ... bị viết liền trên một dòng mà không có dấu chấm phẩy ; để ngăn cách, gây ra lỗi cú pháp.
+
+- Cách sửa: Thêm dấu ; ở cuối câu lệnh hoặc xuống dòng.
+
+**Lỗi 5:** Trộn lẫn các câu lệnh trên cùng một dòng ở vòng lặp (Cú pháp)
+
+- Vị trí: ... console.log("Giá: " + gia2)for (var i = 0; i < 5; i++) {
+
+- Giải thích: Tương tự như lỗi 4, câu lệnh console.log và khởi đầu của vòng lặp for bị dính liền trên một dòng mà không có dấu ngăn cách.
+
+- Cách sửa: Xuống dòng cho vòng lặp for.
+
+**Lỗi 6:** Lỗi "ẩn" scope của var trong vòng lặp phối hợp với setTimeout (Logic)
+
+- Vị trí: for (var i = 0; i < 5; i++) { setTimeout(...) }
+
+- Giải thích: Biến khai báo bằng var có cơ chế function-scope hoặc global-scope (không có block-scope). Do đó, chỉ có một bản sao duy nhất của biến i được tạo ra và dùng chung cho toàn bộ các lần lặp.
+
+  setTimeout là một hàm bất đồng bộ (asynchronous). Nó sẽ đợi sau 1000ms mới chạy. Trong lúc nó đợi, vòng lặp for đã chạy xong rất nhanh và tăng giá trị của i lên thành 5.
+
+  Khi hết 1000ms, cả 5 hàm setTimeout đồng loạt thực thi và cùng nhìn vào biến i chung duy nhất này (lúc này đã bằng 5). Kết quả là màn hình sẽ in ra 5 dòng "Item 5" thay vì từ 0 đến 4.
+
+- Cách sửa: Thay thế var i bằng let i. Vì let có block-scope, mỗi lần lặp vòng for sẽ tạo ra một phạm vi (scope) mới với một biến i hoàn toàn riêng biệt, "đóng băng" giá trị của i tại thời điểm đó cho hàm setTimeout sử dụng.
