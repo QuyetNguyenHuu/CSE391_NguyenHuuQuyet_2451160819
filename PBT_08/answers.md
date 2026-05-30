@@ -142,3 +142,84 @@ Lý do var và let cho kết quả khác nhau nằm ở Phạm vi hoạt động
   - 3 hàm setTimeout của let lúc này tạo thành 3 Closure riêng biệt, mỗi hàm "ghi nhớ" một biến j khác nhau ở từng vòng lặp tương ứng (vòng một ghi nhớ j = 0, vòng hai ghi nhớ j = 1, vòng ba ghi nhớ j = 2).
 
   - Sau 200ms, khi các hàm callback thực thi, chúng tìm về biến j riêng của vòng lặp mà chúng đã ghi nhớ, dẫn đến kết quả in ra là let: 0, let: 1, let: 2.
+
+## Câu A3
+
+```js
+// 1. Lấy các số chẵn
+const cau1 = nums.filter((n) => n % 2 === 0);
+
+// 2. Nhân mỗi số với 3
+const cau2 = nums.map((n) => n * 3);
+
+// 3. Tính tổng tất cả
+const cau3 = nums.reduce((sum, n) => sum + n, 0);
+
+// 4. Tìm số đầu tiên > 7
+const cau4 = nums.find((n) => n > 7);
+
+// 5. Kiểm tra CÓ số > 10 không
+const cau5 = nums.some((n) => n > 10);
+
+// 6. Kiểm tra TẤT CẢ đều > 0
+const cau6 = nums.every((n) => n > 0);
+
+// 7. Tạo mảng "Số X là [chẵn/lẻ]"
+const cau7 = nums.map((n) => `Số ${n} là ${n % 2 === 0 ? "chẵn" : "lẻ"}`);
+
+// 8. Đảo ngược mảng (không mutate / không làm thay đổi mảng gốc)
+const cau8 = [...nums].reverse();
+```
+
+## Câu A4
+
+```js
+const product = {
+  name: "iPhone 16",
+  price: 25990000,
+  specs: { ram: 8, storage: 256, color: "Titan" },
+};
+
+// 1. Destructuring
+
+const {
+  name,
+  price,
+  specs: { ram, color },
+} = product;
+
+console.log(name, price, ram, color);
+// output: iPhone 16 25990000 8 Titan
+// Giải thích: Các biến độc lập được trích xuất thành công từ object
+
+console.log(specs);
+// output: LỖI: ReferenceError: specs is not defined
+// Giải thích: Khi dùng cú pháp lồng nhau `specs: {...}`, 'specs' chỉ đóng vai trò đường dẫn chứ không tạo ra biến
+
+// 2. Spread
+
+const updated = { ...product, price: 23990000, sale: true };
+
+console.log(updated.price);
+// output: 23990000
+// Giải thích: Giá trị mới ghi đè lên giá trị cũ nhờ đứng phía sau
+
+console.log(updated.sale);
+// output: true
+// Giải thích: Thuộc tính mới được thêm vào thành công
+
+console.log(product.price);
+// output: 25990000
+// Giải thích: Gốc KHÔNG đổi vì `updated` là một object độc lập ở tầng 1
+
+// 3. Spread gotcha
+
+const copy = { ...product };
+copy.specs.ram = 16;
+
+console.log(product.specs.ram);
+// output: 16
+// Giải thích: Kết quả là 16 chứ không phải 8. Do Spread Operator chỉ làm Shallow Copy (Sao chép nông).
+// Object lồng bên trong là `specs` không được nhân bản mà chỉ sao chép địa chỉ vùng nhớ (tham chiếu).
+// Vì vậy, cả `copy.specs` và `product.specs` đều trỏ chung vào một nơi; sửa một bên, bên còn lại sẽ bị đổi theo!)
+```
