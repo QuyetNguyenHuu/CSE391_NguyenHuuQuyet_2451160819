@@ -15,6 +15,12 @@ import NumberState from "./components/NumberState";
 import AdvancedForm from "./components/AdvancedForm";
 import MultipleStates from "./components/MultipleStates";
 
+// Import Tier 5 (Xử lý sự kiện tương tác mới)
+import ClickEvents from "./components/ClickEvents";
+import InputEvents from "./components/InputEvents";
+import KeyboardEvents from "./components/KeyboardEvents";
+import FormEvents from "./components/FormEvents";
+
 function App() {
     return (
         <div>
@@ -38,6 +44,12 @@ function App() {
             <NumberState />
             <AdvancedForm />
             <MultipleStates />
+
+            <h2>--- TIER 5 ---</h2>
+            <ClickEvents />
+            <InputEvents />
+            <KeyboardEvents />
+            <FormEvents />
 
             <Footer />
         </div>
