@@ -21,15 +21,18 @@ import InputEvents from "./components/InputEvents";
 import KeyboardEvents from "./components/KeyboardEvents";
 import FormEvents from "./components/FormEvents";
 
-// Import Tier 6 (Quản lý mảng và CRUD động mới)
+// Import Tier 6
 import ListBasics from "./components/ListBasics";
 import CreateItem from "./components/CreateItem";
 import DeleteItem from "./components/DeleteItem";
 import UpdateItem from "./components/UpdateItem";
 
+// Import Tier 7 (Ứng dụng thực tế hoàn chỉnh)
+import TodoDashboard from "./components/TodoDashboard";
+
 function App() {
     return (
-        <div>
+        <div style={{ padding: "10px" }}>
             <Header />
 
             <h2>--- TIER 1 ---</h2>
@@ -62,6 +65,9 @@ function App() {
             <CreateItem />
             <DeleteItem />
             <UpdateItem />
+
+            <h2>--- TIER 7 (MINI PROJECT) ---</h2>
+            <TodoDashboard />
 
             <Footer />
         </div>
