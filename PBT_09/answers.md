@@ -134,3 +134,117 @@ BUTTON
 1. Khi click vào nút `#btn`, hàm lắng nghe sự kiện của nút chạy $\rightarrow$ in ra **`BUTTON`**.
 2. Ngay sau đó, câu lệnh `e.stopPropagation()` được thực thi. Nó chặn đứng dòng chảy của sự kiện.
 3. Kết quả là sự kiện click bị triệt tiêu ngay lập tức, không thể nổi bọt lên `#inner` và `#outer` được nữa. Hai hàm xử lý phía trên hoàn toàn không được kích hoạt.
+
+# Phần C
+
+## Câu C1
+
+1. Dùng sai tên sự kiện trong `addEventListener`
+
+- Lỗi: `document.querySelector("#decrementBtn").addEventListener("onclick", ...)`
+- Sửa: Trong `addEventListener`, tên sự kiện không có tiền tố `on`. Phải đổi `"onclick"` thành `"click"`.
+
+2. Ghi đè biến hằng số (`const`)
+
+- Lỗi:`const countDisplay = document.querySelector(".count");` nhưng ở nút reset lại gán `countDisplay = count;`. Việc này sẽ gây ra lỗi `TypeError: Assignment to constant variable`.
+- Sửa: Phải cập nhật nội dung hiển thị của DOM element: `countDisplay.innerHTML = count;` (hoặc `textContent`).
+
+3. Đặt giá trị `null` cho `innerHTML`
+
+- Lỗi: `historyList.innerHTML = null;` khi reset. Dù trình duyệt có thể tự ép kiểu về chuỗi `"null"`, đây vẫn là bad practice và có thể hiển thị chữ "null" lên màn hình ở một số trình duyệt.
+- Sửa: Đổi thành chuỗi rỗng `historyList.innerHTML = "";`.
+
+4. Gọi hàm `remove` sai cú pháp (Thiếu cặp ngoặc tròn)
+
+- Lỗi: `item.remove;` trong hàm xóa toàn bộ history. Lệnh này chỉ đang tham chiếu đến hàm chứ chưa thực thi nó.
+- Sửa: Thêm cặp ngoặc để gọi hàm: `item.remove();`.
+
+5. Sai kiểu dữ liệu khi lấy từ `localStorage` (Ép kiểu chuỗi thành số)
+
+- Lỗi: `count = localStorage.getItem("count");` trả về một `string` (hoặc `null` nếu chưa có dữ liệu). Khi bấm nút `incrementBtn` (`count++`), JS có thể tự ép kiểu, nhưng nếu `localStorage` trống, `count` sẽ thành `NaN`.
+- Sửa: Cần ép kiểu về số và handle trường hợp chưa có dữ liệu: `count = Number(localStorage.getItem("count")) || 0;`.
+
+6. Quên khôi phục dữ liệu `history` từ `localStorage`
+
+- Lỗi: Ở sự kiện `load`, code có lưu `historyList.innerHTML` vào `localStorage` lúc `beforeunload`, nhưng khi load lại trang thì **hoàn toàn bỏ quên** không hiển thị lại danh sách này.
+- Sửa: Thêm dòng `historyList.innerHTML = localStorage.getItem("history") || "";` vào sự kiện `load`.
+
+7. Lỗi mất Event Listener của các phần tử History sau khi reload trang
+
+- Lỗi: Khi khôi phục `historyList.innerHTML` từ `localStorage`, các thẻ `li` chỉ là HTML thuần túy. Sự kiện `click` để gọi hàm `deleteHistory(this)` gắn bằng JS trước đó đã **bị mất hoàn toàn**. Người dùng click vào các item cũ sẽ không xóa được nữa.
+- Sửa: Thay vì gắn listener vào từng `li`, ta nên dùng kỹ thuật **Event Delegation** (Ủy quyền sự kiện) – gắn 1 sự kiện duy nhất vào thẻ cha `historyList`.
+
+8. Lỗi hiển thị chữ `null` khi load trang lần đầu
+
+- Lỗi: Nếu lần đầu tiên mở ứng dụng, `localStorage.getItem("count")` trả về `null`. Gán thẳng vào `countDisplay.textContent = count;` sẽ khiến màn hình hiển thị chữ `"null"`.
+- Sửa: Cần kiểm tra hoặc set giá trị mặc định là `0`.
+
+**Sửa hoàn chỉnh (Cleaned & Optimized)**
+
+```javascript
+// App: Counter with history
+const countDisplay = document.querySelector(".count");
+const historyList = document.getElementById("history");
+let count = 0;
+
+// SỬA LỖI 7: Dùng Event Delegation cho history list (Xóa item khi click)
+// Giúp các item cài từ localStorage vẫn có thể click xóa bình thường
+historyList.addEventListener("click", function(e) {
+    if (e.target && e.target.nodeName === "LI") {
+        deleteHistory(e.target);
+    }
+});
+
+document.querySelector("#incrementBtn").addEventListener("click", function() {
+    count++;
+    countDisplay.innerHTML = count;
+    
+    // Lưu history
+    const li = document.createElement("li");
+    li.textContent = "Count changed to " + count;
+    // Bỏ đoạn gắn sự kiện trực tiếp ở đây vì đã dùng Event Delegation ở trên
+    historyList.append(li);
+});
+
+// SỬA LỖI 1: Đổi "onclick" thành "click"
+document.querySelector("#decrementBtn").addEventListener("click", function() {
+    count--;
+    countDisplay.innerHTML = count;
+});
+
+document.querySelector("#resetBtn").addEventListener("click", () => {
+    count = 0;
+    // SỬA LỖI 2 & 3: Sửa countDisplay thành thuộc tính innerHTML và đổi null thành ""
+    countDisplay.innerHTML = count;
+    historyList.innerHTML = ""; 
+});
+
+function deleteHistory(element) {
+    element.parentNode.removeChild(element);
+}
+
+// Clear all history
+document.querySelector("#clearHistory").addEventListener("click", () => {
+    const items = historyList.querySelectorAll("li");
+    items.forEach(item => {
+        item.remove(); // SỬA LỖI 4: Thêm dấu () để thực thi hàm
+    });
+});
+
+// Save to localStorage
+window.addEventListener("beforeunload", () => {
+    localStorage.setItem("count", count);
+    localStorage.setItem("history", historyList.innerHTML);
+});
+
+// Load from localStorage
+window.addEventListener("load", () => {
+    // SỬA LỖI 5 & 8: Ép kiểu Number và check dữ liệu mặc định tránh hiển thị "null"
+    count = Number(localStorage.getItem("count")) || 0;
+    countDisplay.textContent = count;
+
+    // SỬA LỖI 6: Khôi phục lại danh sách history từ localStorage
+    historyList.innerHTML = localStorage.getItem("history") || "";
+});
+
+```
