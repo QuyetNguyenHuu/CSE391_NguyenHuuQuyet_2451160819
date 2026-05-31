@@ -147,11 +147,13 @@ BUTTON
 2. Ghi đè biến hằng số (`const`)
 
 - Lỗi:`const countDisplay = document.querySelector(".count");` nhưng ở nút reset lại gán `countDisplay = count;`. Việc này sẽ gây ra lỗi `TypeError: Assignment to constant variable`.
+
 - Sửa: Phải cập nhật nội dung hiển thị của DOM element: `countDisplay.innerHTML = count;` (hoặc `textContent`).
 
 3. Đặt giá trị `null` cho `innerHTML`
 
 - Lỗi: `historyList.innerHTML = null;` khi reset. Dù trình duyệt có thể tự ép kiểu về chuỗi `"null"`, đây vẫn là bad practice và có thể hiển thị chữ "null" lên màn hình ở một số trình duyệt.
+
 - Sửa: Đổi thành chuỗi rỗng `historyList.innerHTML = "";`.
 
 4. Gọi hàm `remove` sai cú pháp (Thiếu cặp ngoặc tròn)
@@ -167,16 +169,19 @@ BUTTON
 6. Quên khôi phục dữ liệu `history` từ `localStorage`
 
 - Lỗi: Ở sự kiện `load`, code có lưu `historyList.innerHTML` vào `localStorage` lúc `beforeunload`, nhưng khi load lại trang thì **hoàn toàn bỏ quên** không hiển thị lại danh sách này.
+
 - Sửa: Thêm dòng `historyList.innerHTML = localStorage.getItem("history") || "";` vào sự kiện `load`.
 
 7. Lỗi mất Event Listener của các phần tử History sau khi reload trang
 
 - Lỗi: Khi khôi phục `historyList.innerHTML` từ `localStorage`, các thẻ `li` chỉ là HTML thuần túy. Sự kiện `click` để gọi hàm `deleteHistory(this)` gắn bằng JS trước đó đã **bị mất hoàn toàn**. Người dùng click vào các item cũ sẽ không xóa được nữa.
+
 - Sửa: Thay vì gắn listener vào từng `li`, ta nên dùng kỹ thuật **Event Delegation** (Ủy quyền sự kiện) – gắn 1 sự kiện duy nhất vào thẻ cha `historyList`.
 
 8. Lỗi hiển thị chữ `null` khi load trang lần đầu
 
 - Lỗi: Nếu lần đầu tiên mở ứng dụng, `localStorage.getItem("count")` trả về `null`. Gán thẳng vào `countDisplay.textContent = count;` sẽ khiến màn hình hiển thị chữ `"null"`.
+
 - Sửa: Cần kiểm tra hoặc set giá trị mặc định là `0`.
 
 **Sửa hoàn chỉnh (Cleaned & Optimized)**
@@ -248,3 +253,56 @@ window.addEventListener("load", () => {
 });
 
 ```
+
+## Câu C2
+
+1. Tại sao bind event lên 1000 elements riêng lẻ là BAD PRACTICE?
+
+Việc lặp qua 1000 phần tử và gắn cho mỗi phần tử một Event Listener riêng biệt được coi là "tối kỵ" (Bad Practice) vì 2 lý do lớn sau:
+
+- Tốn tài nguyên bộ nhớ (Memory Consumption): Mỗi lần bạn gọi `addEventListener`, trình duyệt phải khởi tạo và duy trì một object "Event Listener" trong bộ nhớ RAM. 1000 elements đồng nghĩa với 1000 objects chạy ngầm. Trên các thiết bị cấu hình yếu hoặc mobile, điều này gây ngốn RAM và có thể dẫn đến hiện tượng giật lag, rò rỉ bộ nhớ (Memory Leak).
+
+- Tốn hiệu năng khi cập nhật DOM (Dynamic Elements): Nếu danh sách này thay đổi liên tục (thêm/xóa phần tử), bạn lại phải thủ công gắn thêm event cho phần tử mới hoặc hủy event của phần tử cũ để tránh rò rỉ bộ nhớ. Việc quản lý này cực kỳ phức tạp và tốn công xử lý của CPU.
+
+2. Event Delegation giải quyết thế nào?
+
+- Event Delegation (Ủy quyền sự kiện) giải quyết triệt để vấn đề này dựa trên cơ chế Event Bubbling (Sự nổi bọt sự kiện) của JavaScript. Khi một sự kiện (như `click`) xảy ra trên một phần tử con, sự kiện đó sẽ không dừng lại mà "nổi bọt" dần lên các phần tử cha của nó, cho đến tận thẻ `body` và `window`.
+
+- Thay vì gắn 1000 listener cho 1000 thẻ `div`, ta chỉ gắn 1 listener duy nhất vào thẻ cha chứa chúng (ví dụ: `document.body` hoặc một thẻ `div#container`).
+
+Khi người dùng click vào một item con:
+
+1. Sự kiện nổi bọt lên thẻ cha.
+2. Thẻ cha bắt được sự kiện này.
+3. Ta dùng thuộc tính `event.target` để kiểm tra chính xác phần tử con nào vừa được click và xử lý logic cho phần tử đó.
+
+> **Kết quả:** Từ 1000 Event Listeners giảm xuống chỉ còn **1 Event Listener duy nhất**, tiết kiệm RAM tối đa và tự động áp dụng được cho cả các phần tử con được thêm vào sau này mà không cần gắn lại event.
+
+---
+
+3. Refactor code dùng DocumentFragment
+
+```javascript
+// 1. Tạo một DocumentFragment rỗng đóng vai trò như "vùng đệm" trong bộ nhớ
+const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 1000; i++) {
+    const div = document.createElement("div");
+    div.textContent = `Item ${i}`;
+    
+    // 2. Thêm div vào fragment (Thao tác này hoàn toàn chạy ngầm, không gây reflow)
+    fragment.appendChild(div); 
+}
+
+// 3. Đưa fragment vào DOM thực tế (Chỉ gây ra ĐÚNG 1 LẦN REFLOW)
+document.body.appendChild(fragment);
+
+```
+
+4. Tại sao cách này lại nhanh hơn?
+
+Để hiểu tại sao `DocumentFragment` nhanh hơn, chúng ta cần so sánh cơ chế hoạt động của 2 cách làm:
+
+- Khi ta lặp 1000 lần để nhét `div` vào `fragment`, trình duyệt **không hề** phải tính toán lại giao diện vì `fragment` chưa hiển thị trên màn hình.
+
+- Đến bước cuối cùng, khi ta append `fragment` vào `document.body`, trình duyệt sẽ trích xuất toàn bộ các thẻ con bên trong fragment ra và chèn vào DOM cùng một lúc. Trình duyệt chỉ cần tính toán lại cấu trúc layout **đúng 1 lần duy nhất** cho cả 1000 phần tử. Hiệu năng nhờ đó được tối ưu hóa rõ rệt.
