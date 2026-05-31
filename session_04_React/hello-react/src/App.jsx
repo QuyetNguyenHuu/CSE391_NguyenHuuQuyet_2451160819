@@ -15,11 +15,17 @@ import NumberState from "./components/NumberState";
 import AdvancedForm from "./components/AdvancedForm";
 import MultipleStates from "./components/MultipleStates";
 
-// Import Tier 5 (Xử lý sự kiện tương tác mới)
+// Import Tier 5
 import ClickEvents from "./components/ClickEvents";
 import InputEvents from "./components/InputEvents";
 import KeyboardEvents from "./components/KeyboardEvents";
 import FormEvents from "./components/FormEvents";
+
+// Import Tier 6 (Quản lý mảng và CRUD động mới)
+import ListBasics from "./components/ListBasics";
+import CreateItem from "./components/CreateItem";
+import DeleteItem from "./components/DeleteItem";
+import UpdateItem from "./components/UpdateItem";
 
 function App() {
     return (
@@ -50,6 +56,12 @@ function App() {
             <InputEvents />
             <KeyboardEvents />
             <FormEvents />
+
+            <h2>--- TIER 6 ---</h2>
+            <ListBasics />
+            <CreateItem />
+            <DeleteItem />
+            <UpdateItem />
 
             <Footer />
         </div>
