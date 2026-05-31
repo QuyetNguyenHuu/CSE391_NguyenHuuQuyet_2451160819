@@ -102,3 +102,35 @@ document.querySelector("#result").innerHTML = userInput;
 - Vì đường dẫn x không tồn tại, hình ảnh bị lỗi và ngay lập tức kích hoạt sự kiện onerror.
 
 - Đoạn mã nằm trong onerror (ở đây là alert('Hacked!')) được kích hoạt. Thay vì alert, kẻ tấn công có thể viết code để âm thầm lấy cắp cookie, session hoặc token của người dùng và gửi về server của họ.
+
+## Câu A3
+
+1. Trường hợp 1: Khi chưa bỏ comment (Mặc định)
+
+Khi click vào nút `<button id="btn">`, sự kiện click sẽ được kích hoạt tại phần tử sâu nhất này, sau đó "nổi bọt" (bubbling) dần lên các phần tử cha bao bọc nó theo thứ tự từ trong ra ngoài.
+
+**Thứ tự `console.log` in ra sẽ là:**
+
+```text
+BUTTON
+INNER
+OUTER
+```
+**Giải thích:**
+1. Đầu tiên, sự kiện trúng mục tiêu (`#btn`) $\rightarrow$ in ra **`BUTTON`**.
+2. Sự kiện nổi bọt lên phần tử cha trực tiếp (`#inner`) $\rightarrow$ in ra **`INNER`**.
+3. Sự kiện tiếp tục nổi bọt lên phần tử cha cao hơn (`#outer`) $\rightarrow$ in ra **`OUTER`**.
+
+2. Trường hợp 2: Nếu bỏ comment `e.stopPropagation();`
+
+- Hàm `e.stopPropagation()` có nhiệm vụ **ngăn chặn sự kiện tiếp tục nổi bọt** lên các phần tử cha phía trên. Nó cô lập sự kiện ngay tại nơi nó được gọi.
+
+**Thứ tự `console.log` thay đổi thành:**
+
+```text
+BUTTON
+```
+**Giải thích:**
+1. Khi click vào nút `#btn`, hàm lắng nghe sự kiện của nút chạy $\rightarrow$ in ra **`BUTTON`**.
+2. Ngay sau đó, câu lệnh `e.stopPropagation()` được thực thi. Nó chặn đứng dòng chảy của sự kiện.
+3. Kết quả là sự kiện click bị triệt tiêu ngay lập tức, không thể nổi bọt lên `#inner` và `#outer` được nữa. Hai hàm xử lý phía trên hoàn toàn không được kích hoạt.
